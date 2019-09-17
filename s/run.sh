@@ -1,0 +1,1 @@
+./mvnw -pl godzula spring-boot:run

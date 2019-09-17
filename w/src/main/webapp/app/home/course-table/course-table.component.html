@@ -1,0 +1,11 @@
+<div class="container course-table">
+  <div class="row d-flex justify-content-end">
+    <button class="btn btn-dark" [class.disabled]="!showWin" style="width: 100px;" (click)="showWin=!showWin">Windows</button>
+    <button class="btn btn-dark ml-1" [class.disabled]="!showMac" style="width: 100px;" (click)="showMac=!showMac">Mac OS</button>
+  </div>
+  <div class="row justify-content-center">
+    <div *ngFor="let c of courses$ | async">
+      <jhi-course-table-item [course]="c"></jhi-course-table-item>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+image: node:latest
+
+stages:
+- build_test
+- deploy
+
+cache:
+  paths:
+  - node_modules
+
+build_test:
+  stage: build_test
+  script:
+    - npm install
+    - npm run build
+    - npm run test
+  artifacts:
+    paths:
+    - build/www
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - npm install
+    - npm run build
+    - $(npm bin)/netlify deploy --prod -d build/www
+  only:
+    - deploy

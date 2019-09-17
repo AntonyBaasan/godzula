@@ -1,0 +1,20 @@
+{
+    "generator-jhipster": {
+        "jhipsterVersion": "5.7.2",
+        "applicationType": "monolith",
+        "baseName": "godzulaweb",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "authenticationType": "jwt",
+        "cacheProvider": "no",
+        "databaseType": "mongodb",
+        "devDatabaseType": "mongodb",
+        "prodDatabaseType": "mongodb",
+        "testFrameworks": ["protractor"],
+        "jhiPrefix": "jhi",
+        "otherModules": [],
+        "enableTranslation": false,
+        "skipServer": true
+    }
+}

@@ -1,0 +1,13 @@
+<div>
+  <ul class="nav flex-column nav-pills nav-fill">
+    <li *ngFor="let item of sectionListItem" class="nav-item">
+      <div class="nav-link rounded-0"
+        (click)="selectSection(item)"
+        [class.active]="isSelectedItem(item)"
+        [class.font-weight-bold]="item.passed==true"
+        [class.disabled]="item.passed==false">
+        <span>{{item.section.name}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

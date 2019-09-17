@@ -1,0 +1,46 @@
+<div class="container">
+  <ng-template [ngIf]="isPassed()">
+    <div class="result-panel d-flex justify-content-center align-items-center">
+      <div>
+        <div class="h3">
+          Completed
+        </div>
+        <div>
+          <button class="btn btn-dark" (click)="next()">Next</button>
+          <button class="btn btn-dark" (click)="restart()">Again</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="!isPassed()">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex pt-2">
+          <div class="ml-auto">
+            <h4><span class="badge badge-dark">{{doneCount}}/{{allCount}}</span></h4>
+          </div>
+        </div>
+        <div class="mb-2">
+          <jhi-key-input #keyInputField [values]="values" [label]="getCurrentQuestion()" [showClearButton]="false"
+            [showHint]="showHint"
+            [Hint]="getCurrentAnswer()"
+            [Device]="device"
+            (valuesChanged)="onValuesChanged($event)"></jhi-key-input>
+        </div>
+
+        <!-- TODO: move to a component -->
+        <div *ngFor="let h of history">
+          <div class="card mb-1">
+            <div class="card-body py-1">
+              <p class="h5 mb-2" [ngClass]="(h.isCorrect)?'text-success':'text-danger'">{{h.inputAnswer}}</p>
+              <p class="mb-1 text-secondary">{{h.question}}</p>
+              <p class="mb-0 small text-success" *ngIf="h.isCorrect==false">{{h.expectedAnswer}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </ng-template>
+</div>

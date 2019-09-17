@@ -1,0 +1,22 @@
+<p>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" [(ngModel)]="showHint" id="defaultCheck1">
+    <label class="form-check-label" for="defaultCheck1">
+      Show Hint
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" [(ngModel)]="isCompact" id="defaultCheck2">
+    <label class="form-check-label" for="defaultCheck2">
+      isCompact
+    </label>
+  </div>
+  <button class="btn btn-primary" (click)="selectWin()">Win</button>
+  <button class="btn btn-primary" (click)="selectMac()">Mac</button>
+
+  <h3>jhi-key-input</h3>
+  <jhi-key-input [Hint]="expectedValues" [showHint]="showHint" [values]="values" [isCompact]="isCompact"
+    [Device]="device" (valuesChanged)="onValuesChanged($event)"></jhi-key-input>
+  {{values | json}}
+</p>
+<hr>

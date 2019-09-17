@@ -1,0 +1,30 @@
+<div>
+  <label *ngIf="label" for="lbl" class="h3">{{label}}</label>
+  <div class="input-group">
+
+    <div class="form-control input-box" [class.input-box-big]="!isCompact">
+      <div class="input-child">
+        <div class="text d-flex" *ngIf="showHint">
+          <span class="text-secondary align-self-center">{{getHintAsText()}}</span>
+        </div>
+      </div>
+      <div class="input-child">
+        <div class="text d-flex">
+          <span class="text-dark align-self-center">{{getCurrentAsText()}}</span>
+        </div>
+      </div>
+      <div class="input-child hidden-input">
+        <input autocomplete="off" #inputField type="text" id="lbl" [ngModel]="getCurrentAsText()"
+          (keydown)="onKeyDown($event)">
+      </div>
+    </div>
+
+    <ng-template [ngIf]="showClearButton">
+      <div class="input-group-append">
+        <button type="button" class="btn btn-dark" aria-label="Close" (click)="clear()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>

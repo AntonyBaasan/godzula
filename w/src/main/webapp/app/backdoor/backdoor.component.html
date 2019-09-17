@@ -1,0 +1,12 @@
+<div [ngSwitch]="!isAuthenticated()">
+  <div *ngSwitchCase="true">
+    <button type="button" class="btn btn-success" (click)="login()">Login</button>
+  </div>
+  <div *ngSwitchCase="false">
+    {{userInfo | json}}
+    <br/>
+    <button type="button" class="btn btn-success" (click)="logout()">Logout</button>
+    <hr/>
+  </div>
+</div>
+

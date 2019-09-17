@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "question",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "answer",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "TaskType",
+            "fieldValues": "SHORTCUT,TEXT"
+        },
+        {
+            "fieldName": "targetMachine",
+            "fieldType": "MachineType",
+            "fieldValues": "ANY,WIN,MAC"
+        }
+    ],
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceImpl",
+    "entityTableName": "task",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

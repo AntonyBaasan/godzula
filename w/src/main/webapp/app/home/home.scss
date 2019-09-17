@@ -1,0 +1,35 @@
+/* ==========================================================================
+Main page styles
+========================================================================== */
+
+.hipster {
+    display: inline-block;
+    width: 347px;
+    height: 497px;
+    background: url('../../content/images/jhipster_family_member_0.svg') no-repeat center top;
+    background-size: contain;
+}
+
+/* wait autoprefixer update to allow simple generation of high pixel density media query */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (-moz-min-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    .hipster {
+        background: url('../../content/images/jhipster_family_member_0.svg') no-repeat center top;
+        background-size: contain;
+    }
+}
+
+.jumbotron {
+    height: 250px;
+    background: rgb(52, 58, 64); /* Old browsers */
+    background: -moz-linear-gradient(left, rgba(52, 58, 64, 1) 65%, rgba(99, 99, 99, 1) 99%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(52, 58, 64, 1) 65%, rgba(99, 99, 99, 1) 99%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(
+        to right,
+        rgba(52, 58, 64, 1) 65%,
+        rgba(99, 99, 99, 1) 99%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}

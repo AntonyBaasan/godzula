@@ -7,6 +7,12 @@
             "otherEntityName": "task",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "section"
+        },
+        {
+            "relationshipName": "course",
+            "otherEntityName": "course",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.godzula",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "5.7.2",
+    "applicationType": "monolith",
+    "baseName": "godzula",
+    "packageName": "com.godzula",
+    "packageFolder": "com/godzula",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZWMxYWIzYzhiMjNjOGQzYTNjZmQyZjY4YzhlODU4YTdlYjQ0MmY5ZmNkNGMyZGRmODg2ZTY0Y2E3ZDYyZTIyYTgzMjdlMDdmNTAzMDFiMTNhMDhhY2UxM2Q1N2ZjZjRlYTU0YzNiYzliZjMwMjYwYWY0YTZkYWYxM2YwZGFhZTI=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ],
+    "skipClient": true
+  }
+}

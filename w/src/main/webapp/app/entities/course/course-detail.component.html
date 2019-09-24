@@ -1,14 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="course">
-            <button type="submit" (click)="previousState()" class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
-            </button>
-
-            <button type="button" [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
-            </button>
-
             <h2><span>Course</span> {{course.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
@@ -29,28 +21,17 @@
                 <dd>
                     <span>{{course.status}}</span>
                 </dd>
-                <dt><span>Target Machine</span></dt>
-                <dd>
-                    <span>{{course.targetMachine}}</span>
-                </dd>
-                <div>
-                    <a class="btn btn-primary" (click)="toggleSections()">
-                        {{showSections?"Hide": "Show"}} sections ({{getSectionCount()}})
-                    </a>
-                    <div *ngIf="showSections">
-                        <div *ngFor="let section of course.sections">
-                            <jhi-section-detail [section]="section"></jhi-section-detail>
-                        </div>
-                    </div>
-                </div>
             </dl>
 
-
-            <button type="submit" (click)="previousState()" class="btn btn-info">
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 
-            <button type="button" [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary">
+            <button type="button"
+                    [routerLink]="['/course', course.id, 'edit']"
+                    class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
             </button>
         </div>

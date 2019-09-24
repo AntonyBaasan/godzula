@@ -1,9 +1,5 @@
-import { MachineType } from './section.model';
-
-export const enum TaskType {
-    SHORTCUT = 'SHORTCUT',
-    TEXT = 'TEXT'
-}
+import { TaskType } from 'app/shared/model/enumerations/task-type.model';
+import { MachineType } from 'app/shared/model/enumerations/machine-type.model';
 
 export interface ITask {
     id?: string;
@@ -12,6 +8,7 @@ export interface ITask {
     answer?: string;
     type?: TaskType;
     targetMachine?: MachineType;
+    sectionId?: string;
 }
 
 export class Task implements ITask {
@@ -21,6 +18,7 @@ export class Task implements ITask {
         public description?: string,
         public answer?: string,
         public type?: TaskType,
-        public targetMachine?: MachineType
+        public targetMachine?: MachineType,
+        public sectionId?: string
     ) {}
 }

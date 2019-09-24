@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="task">
+            <h2><span>Task</span> {{task.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Question</span></dt>
+                <dd>
+                    <span>{{task.question}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{task.description}}</span>
+                </dd>
+                <dt><span>Answer</span></dt>
+                <dd>
+                    <span>{{task.answer}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{task.type}}</span>
+                </dd>
+                <dt><span>Target Machine</span></dt>
+                <dd>
+                    <span>{{task.targetMachine}}</span>
+                </dd>
+                <dt><span>Section</span></dt>
+                <dd>
+                    <div *ngIf="task.sectionId">
+                        <a [routerLink]="['/section', task.sectionId, 'view']">{{task.sectionId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/task', task.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

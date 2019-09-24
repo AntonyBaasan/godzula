@@ -1,7 +1,8 @@
-/* tslint:disable no-unused-expression */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { TaskComponentsPage, TaskDeleteDialog, TaskUpdatePage } from './task.page-object';
 
 const expect = chai.expect;
@@ -24,6 +25,7 @@ describe('Task e2e test', () => {
     it('should load Tasks', async () => {
         await navBarPage.goToEntity('task');
         taskComponentsPage = new TaskComponentsPage();
+        await browser.wait(ec.visibilityOf(taskComponentsPage.title), 5000);
         expect(await taskComponentsPage.getTitle()).to.eq('Tasks');
     });
 
@@ -43,15 +45,16 @@ describe('Task e2e test', () => {
             taskUpdatePage.setDescriptionInput('description'),
             taskUpdatePage.setAnswerInput('answer'),
             taskUpdatePage.typeSelectLastOption(),
-            taskUpdatePage.targetMachineSelectLastOption()
+            taskUpdatePage.targetMachineSelectLastOption(),
+            taskUpdatePage.sectionSelectLastOption()
         ]);
-        expect(await taskUpdatePage.getQuestionInput()).to.eq('question');
-        expect(await taskUpdatePage.getDescriptionInput()).to.eq('description');
-        expect(await taskUpdatePage.getAnswerInput()).to.eq('answer');
+        expect(await taskUpdatePage.getQuestionInput()).to.eq('question', 'Expected Question value to be equals to question');
+        expect(await taskUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
+        expect(await taskUpdatePage.getAnswerInput()).to.eq('answer', 'Expected Answer value to be equals to answer');
         await taskUpdatePage.save();
-        expect(await taskUpdatePage.getSaveButton().isPresent()).to.be.false;
+        expect(await taskUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-        expect(await taskComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1);
+        expect(await taskComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
     });
 
     it('should delete last Task', async () => {

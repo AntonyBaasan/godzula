@@ -1,15 +1,6 @@
-import { ITask } from './task.model';
-
-export const enum MachineType {
-    ANY = 'ANY',
-    WIN = 'WIN',
-    MAC = 'MAC'
-}
-
-export const enum SectionStatus {
-    DRAFT = 'DRAFT',
-    PUBLISHED = 'PUBLISHED'
-}
+import { ITask } from 'app/shared/model/task.model';
+import { SectionStatus } from 'app/shared/model/enumerations/section-status.model';
+import { MachineType } from 'app/shared/model/enumerations/machine-type.model';
 
 export interface ISection {
     id?: string;
@@ -18,7 +9,7 @@ export interface ISection {
     status?: SectionStatus;
     targetMachine?: MachineType;
     tasks?: ITask[];
-    order?: number;
+    courseId?: string;
 }
 
 export class Section implements ISection {
@@ -29,6 +20,6 @@ export class Section implements ISection {
         public status?: SectionStatus,
         public targetMachine?: MachineType,
         public tasks?: ITask[],
-        public order?: number
+        public courseId?: string
     ) {}
 }

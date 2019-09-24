@@ -1,5 +1,5 @@
-import { ISection, MachineType } from 'app/shared/model/section.model';
-import { CourseStatus } from 'app/shared/enum/course-status';
+import { ISection } from 'app/shared/model/section.model';
+import { CourseStatus } from 'app/shared/model/enumerations/course-status.model';
 
 export interface ICourse {
     id?: string;
@@ -8,7 +8,6 @@ export interface ICourse {
     imageUrl?: string;
     status?: CourseStatus;
     sections?: ISection[];
-    targetMachine?: MachineType;
 }
 
 export class Course implements ICourse {
@@ -18,7 +17,6 @@ export class Course implements ICourse {
         public description?: string,
         public imageUrl?: string,
         public status?: CourseStatus,
-        public sections?: ISection[],
-        public targetMachine?: MachineType
+        public sections?: ISection[]
     ) {}
 }

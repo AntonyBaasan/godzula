@@ -5,11 +5,11 @@ export class TaskComponentsPage {
     deleteButtons = element.all(by.css('jhi-task div table .btn-danger'));
     title = element.all(by.css('jhi-task div h2#page-heading span')).first();
 
-    async clickOnCreateButton() {
+    async clickOnCreateButton(timeout?: number) {
         await this.createButton.click();
     }
 
-    async clickOnLastDeleteButton() {
+    async clickOnLastDeleteButton(timeout?: number) {
         await this.deleteButtons.last().click();
     }
 
@@ -31,6 +31,7 @@ export class TaskUpdatePage {
     answerInput = element(by.id('field_answer'));
     typeSelect = element(by.id('field_type'));
     targetMachineSelect = element(by.id('field_targetMachine'));
+    sectionSelect = element(by.id('field_section'));
 
     async getPageTitle() {
         return this.pageTitle.getText();
@@ -41,7 +42,7 @@ export class TaskUpdatePage {
     }
 
     async getQuestionInput() {
-        return this.questionInput.getAttribute('value');
+        return await this.questionInput.getAttribute('value');
     }
 
     async setDescriptionInput(description) {
@@ -49,7 +50,7 @@ export class TaskUpdatePage {
     }
 
     async getDescriptionInput() {
-        return this.descriptionInput.getAttribute('value');
+        return await this.descriptionInput.getAttribute('value');
     }
 
     async setAnswerInput(answer) {
@@ -57,7 +58,7 @@ export class TaskUpdatePage {
     }
 
     async getAnswerInput() {
-        return this.answerInput.getAttribute('value');
+        return await this.answerInput.getAttribute('value');
     }
 
     async setTypeSelect(type) {
@@ -65,10 +66,10 @@ export class TaskUpdatePage {
     }
 
     async getTypeSelect() {
-        return this.typeSelect.element(by.css('option:checked')).getText();
+        return await this.typeSelect.element(by.css('option:checked')).getText();
     }
 
-    async typeSelectLastOption() {
+    async typeSelectLastOption(timeout?: number) {
         await this.typeSelect
             .all(by.tagName('option'))
             .last()
@@ -80,21 +81,40 @@ export class TaskUpdatePage {
     }
 
     async getTargetMachineSelect() {
-        return this.targetMachineSelect.element(by.css('option:checked')).getText();
+        return await this.targetMachineSelect.element(by.css('option:checked')).getText();
     }
 
-    async targetMachineSelectLastOption() {
+    async targetMachineSelectLastOption(timeout?: number) {
         await this.targetMachineSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async save() {
+    async sectionSelectLastOption(timeout?: number) {
+        await this.sectionSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async sectionSelectOption(option) {
+        await this.sectionSelect.sendKeys(option);
+    }
+
+    getSectionSelect(): ElementFinder {
+        return this.sectionSelect;
+    }
+
+    async getSectionSelectedOption() {
+        return await this.sectionSelect.element(by.css('option:checked')).getText();
+    }
+
+    async save(timeout?: number) {
         await this.saveButton.click();
     }
 
-    async cancel() {
+    async cancel(timeout?: number) {
         await this.cancelButton.click();
     }
 
@@ -111,7 +131,7 @@ export class TaskDeleteDialog {
         return this.dialogTitle.getText();
     }
 
-    async clickOnConfirmButton() {
+    async clickOnConfirmButton(timeout?: number) {
         await this.confirmButton.click();
     }
 }

@@ -5,11 +5,11 @@ export class CourseComponentsPage {
     deleteButtons = element.all(by.css('jhi-course div table .btn-danger'));
     title = element.all(by.css('jhi-course div h2#page-heading span')).first();
 
-    async clickOnCreateButton() {
+    async clickOnCreateButton(timeout?: number) {
         await this.createButton.click();
     }
 
-    async clickOnLastDeleteButton() {
+    async clickOnLastDeleteButton(timeout?: number) {
         await this.deleteButtons.last().click();
     }
 
@@ -40,7 +40,7 @@ export class CourseUpdatePage {
     }
 
     async getNameInput() {
-        return this.nameInput.getAttribute('value');
+        return await this.nameInput.getAttribute('value');
     }
 
     async setDescriptionInput(description) {
@@ -48,7 +48,7 @@ export class CourseUpdatePage {
     }
 
     async getDescriptionInput() {
-        return this.descriptionInput.getAttribute('value');
+        return await this.descriptionInput.getAttribute('value');
     }
 
     async setImageUrlInput(imageUrl) {
@@ -56,7 +56,7 @@ export class CourseUpdatePage {
     }
 
     async getImageUrlInput() {
-        return this.imageUrlInput.getAttribute('value');
+        return await this.imageUrlInput.getAttribute('value');
     }
 
     async setStatusSelect(status) {
@@ -64,21 +64,21 @@ export class CourseUpdatePage {
     }
 
     async getStatusSelect() {
-        return this.statusSelect.element(by.css('option:checked')).getText();
+        return await this.statusSelect.element(by.css('option:checked')).getText();
     }
 
-    async statusSelectLastOption() {
+    async statusSelectLastOption(timeout?: number) {
         await this.statusSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async save() {
+    async save(timeout?: number) {
         await this.saveButton.click();
     }
 
-    async cancel() {
+    async cancel(timeout?: number) {
         await this.cancelButton.click();
     }
 
@@ -95,7 +95,7 @@ export class CourseDeleteDialog {
         return this.dialogTitle.getText();
     }
 
-    async clickOnConfirmButton() {
+    async clickOnConfirmButton(timeout?: number) {
         await this.confirmButton.click();
     }
 }

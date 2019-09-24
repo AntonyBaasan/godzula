@@ -5,11 +5,11 @@ export class SectionComponentsPage {
     deleteButtons = element.all(by.css('jhi-section div table .btn-danger'));
     title = element.all(by.css('jhi-section div h2#page-heading span')).first();
 
-    async clickOnCreateButton() {
+    async clickOnCreateButton(timeout?: number) {
         await this.createButton.click();
     }
 
-    async clickOnLastDeleteButton() {
+    async clickOnLastDeleteButton(timeout?: number) {
         await this.deleteButtons.last().click();
     }
 
@@ -30,6 +30,7 @@ export class SectionUpdatePage {
     descriptionInput = element(by.id('field_description'));
     statusSelect = element(by.id('field_status'));
     targetMachineSelect = element(by.id('field_targetMachine'));
+    courseSelect = element(by.id('field_course'));
 
     async getPageTitle() {
         return this.pageTitle.getText();
@@ -40,7 +41,7 @@ export class SectionUpdatePage {
     }
 
     async getNameInput() {
-        return this.nameInput.getAttribute('value');
+        return await this.nameInput.getAttribute('value');
     }
 
     async setDescriptionInput(description) {
@@ -48,7 +49,7 @@ export class SectionUpdatePage {
     }
 
     async getDescriptionInput() {
-        return this.descriptionInput.getAttribute('value');
+        return await this.descriptionInput.getAttribute('value');
     }
 
     async setStatusSelect(status) {
@@ -56,10 +57,10 @@ export class SectionUpdatePage {
     }
 
     async getStatusSelect() {
-        return this.statusSelect.element(by.css('option:checked')).getText();
+        return await this.statusSelect.element(by.css('option:checked')).getText();
     }
 
-    async statusSelectLastOption() {
+    async statusSelectLastOption(timeout?: number) {
         await this.statusSelect
             .all(by.tagName('option'))
             .last()
@@ -71,21 +72,40 @@ export class SectionUpdatePage {
     }
 
     async getTargetMachineSelect() {
-        return this.targetMachineSelect.element(by.css('option:checked')).getText();
+        return await this.targetMachineSelect.element(by.css('option:checked')).getText();
     }
 
-    async targetMachineSelectLastOption() {
+    async targetMachineSelectLastOption(timeout?: number) {
         await this.targetMachineSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async save() {
+    async courseSelectLastOption(timeout?: number) {
+        await this.courseSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async courseSelectOption(option) {
+        await this.courseSelect.sendKeys(option);
+    }
+
+    getCourseSelect(): ElementFinder {
+        return this.courseSelect;
+    }
+
+    async getCourseSelectedOption() {
+        return await this.courseSelect.element(by.css('option:checked')).getText();
+    }
+
+    async save(timeout?: number) {
         await this.saveButton.click();
     }
 
-    async cancel() {
+    async cancel(timeout?: number) {
         await this.cancelButton.click();
     }
 
@@ -102,7 +122,7 @@ export class SectionDeleteDialog {
         return this.dialogTitle.getText();
     }
 
-    async clickOnConfirmButton() {
+    async clickOnConfirmButton(timeout?: number) {
         await this.confirmButton.click();
     }
 }

@@ -1,6 +1,5 @@
-/* tslint:disable max-line-length */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { GodzulawebTestModule } from '../../../test.module';
@@ -13,13 +12,12 @@ describe('Component Tests', () => {
         let comp: CourseComponent;
         let fixture: ComponentFixture<CourseComponent>;
         let service: CourseService;
-        const myMockWindow: any = { ga: () => {} };
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [GodzulawebTestModule],
                 declarations: [CourseComponent],
-                providers: [{ provide: Window, useValue: myMockWindow }]
+                providers: []
             })
                 .overrideTemplate(CourseComponent, '')
                 .compileComponents();

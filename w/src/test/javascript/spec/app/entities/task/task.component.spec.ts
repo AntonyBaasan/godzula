@@ -1,11 +1,10 @@
-/* tslint:disable max-line-length */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { GodzulawebTestModule } from '../../../test.module';
-import { TaskComponent } from 'app/entities/course/task/task.component';
-import { TaskService } from 'app/entities/course/task/task.service';
+import { TaskComponent } from 'app/entities/task/task.component';
+import { TaskService } from 'app/entities/task/task.service';
 import { Task } from 'app/shared/model/task.model';
 
 describe('Component Tests', () => {

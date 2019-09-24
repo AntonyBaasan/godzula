@@ -1,7 +1,7 @@
-/* tslint:disable max-line-length */
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { of } from 'rxjs';
 
 import { GodzulawebTestModule } from '../../../test.module';
 import { CourseUpdateComponent } from 'app/entities/course/course-update.component';
@@ -17,7 +17,8 @@ describe('Component Tests', () => {
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [GodzulawebTestModule],
-                declarations: [CourseUpdateComponent]
+                declarations: [CourseUpdateComponent],
+                providers: [FormBuilder]
             })
                 .overrideTemplate(CourseUpdateComponent, '')
                 .compileComponents();
@@ -32,7 +33,7 @@ describe('Component Tests', () => {
                 // GIVEN
                 const entity = new Course('123');
                 spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
-                comp.course = entity;
+                comp.updateForm(entity);
                 // WHEN
                 comp.save();
                 tick(); // simulate async
@@ -46,7 +47,7 @@ describe('Component Tests', () => {
                 // GIVEN
                 const entity = new Course();
                 spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
-                comp.course = entity;
+                comp.updateForm(entity);
                 // WHEN
                 comp.save();
                 tick(); // simulate async

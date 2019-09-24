@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { UserRouteAccessService } from 'app/core';
+import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { Observable, of } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Course } from 'app/shared/model/course.model';
 import { CourseService } from './course.service';
 import { CourseComponent } from './course.component';
@@ -11,14 +11,13 @@ import { CourseDetailComponent } from './course-detail.component';
 import { CourseUpdateComponent } from './course-update.component';
 import { CourseDeletePopupComponent } from './course-delete-dialog.component';
 import { ICourse } from 'app/shared/model/course.model';
-import { CourseStateFacade } from 'app/state/course/course.facade';
 
 @Injectable({ providedIn: 'root' })
 export class CourseResolve implements Resolve<ICourse> {
-    constructor(private service: CourseService, private stateFacade: CourseStateFacade) {}
+    constructor(private service: CourseService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course> {
-        const id = route.params['id'] ? route.params['id'] : null;
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ICourse> {
+        const id = route.params['id'];
         if (id) {
             return this.service.find(id).pipe(
                 filter((response: HttpResponse<Course>) => response.ok),
@@ -31,7 +30,7 @@ export class CourseResolve implements Resolve<ICourse> {
 
 export const courseRoute: Routes = [
     {
-        path: 'course',
+        path: '',
         component: CourseComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -40,7 +39,7 @@ export const courseRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'course/:id/view',
+        path: ':id/view',
         component: CourseDetailComponent,
         resolve: {
             course: CourseResolve
@@ -52,7 +51,7 @@ export const courseRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'course/new',
+        path: 'new',
         component: CourseUpdateComponent,
         resolve: {
             course: CourseResolve
@@ -64,7 +63,7 @@ export const courseRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'course/:id/edit',
+        path: ':id/edit',
         component: CourseUpdateComponent,
         resolve: {
             course: CourseResolve
@@ -79,7 +78,7 @@ export const courseRoute: Routes = [
 
 export const coursePopupRoute: Routes = [
     {
-        path: 'course/:id/delete',
+        path: ':id/delete',
         component: CourseDeletePopupComponent,
         resolve: {
             course: CourseResolve

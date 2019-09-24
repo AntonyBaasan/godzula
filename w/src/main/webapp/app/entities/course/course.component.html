@@ -4,14 +4,17 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-course" [routerLink]="['/course/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create new Course
+            Create a new Course
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="courses">
-        <table class="table table-striped">
+    <div class="alert alert-warning" *ngIf="courses?.length === 0">
+        <span>No courses found</span>
+    </div>
+    <div class="table-responsive" *ngIf="courses?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr>
             <th><span>ID</span></th>
@@ -19,8 +22,6 @@
             <th><span>Description</span></th>
             <th><span>Image Url</span></th>
             <th><span>Status</span></th>
-            <th><span>Target</span></th>
-            <th><span>Sections</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,16 +32,8 @@
                 <td>{{course.description}}</td>
                 <td>{{course.imageUrl}}</td>
                 <td>{{course.status}}</td>
-                <td>{{course.targetMachine}}</td>
-                <td>{{course.sections.length}}</td>
                 <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                (click)="clone(course)"
-                                class="btn btn-success btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">Clone</span>
-                        </button>
+                    <div class="btn-group">
                         <button type="submit"
                                 [routerLink]="['/course', course.id, 'view' ]"
                                 class="btn btn-info btn-sm">
@@ -54,7 +47,7 @@
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'course/'+ course.id + '/delete'} }]"
+                                [routerLink]="['/course', { outlets: { popup: course.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

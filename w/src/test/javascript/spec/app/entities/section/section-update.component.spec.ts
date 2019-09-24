@@ -1,11 +1,11 @@
-/* tslint:disable max-line-length */
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { of } from 'rxjs';
 
 import { GodzulawebTestModule } from '../../../test.module';
-import { SectionUpdateComponent } from 'app/entities/course/section/section-update.component';
-import { SectionService } from 'app/entities/course/section/section.service';
+import { SectionUpdateComponent } from 'app/entities/section/section-update.component';
+import { SectionService } from 'app/entities/section/section.service';
 import { Section } from 'app/shared/model/section.model';
 
 describe('Component Tests', () => {
@@ -17,7 +17,8 @@ describe('Component Tests', () => {
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [GodzulawebTestModule],
-                declarations: [SectionUpdateComponent]
+                declarations: [SectionUpdateComponent],
+                providers: [FormBuilder]
             })
                 .overrideTemplate(SectionUpdateComponent, '')
                 .compileComponents();
@@ -28,7 +29,33 @@ describe('Component Tests', () => {
         });
 
         describe('save', () => {
-            it('', () => {});
+            it('Should call update service on save for existing entity', fakeAsync(() => {
+                // GIVEN
+                const entity = new Section('123');
+                spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
+                comp.updateForm(entity);
+                // WHEN
+                comp.save();
+                tick(); // simulate async
+
+                // THEN
+                expect(service.update).toHaveBeenCalledWith(entity);
+                expect(comp.isSaving).toEqual(false);
+            }));
+
+            it('Should call create service on save for new entity', fakeAsync(() => {
+                // GIVEN
+                const entity = new Section();
+                spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
+                comp.updateForm(entity);
+                // WHEN
+                comp.save();
+                tick(); // simulate async
+
+                // THEN
+                expect(service.create).toHaveBeenCalledWith(entity);
+                expect(comp.isSaving).toEqual(false);
+            }));
         });
     });
 });

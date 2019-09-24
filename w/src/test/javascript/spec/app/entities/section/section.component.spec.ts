@@ -1,11 +1,10 @@
-/* tslint:disable max-line-length */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { GodzulawebTestModule } from '../../../test.module';
-import { SectionComponent } from 'app/entities/course/section/section.component';
-import { SectionService } from 'app/entities/course/section/section.service';
+import { SectionComponent } from 'app/entities/section/section.component';
+import { SectionService } from 'app/entities/section/section.service';
 import { Section } from 'app/shared/model/section.model';
 
 describe('Component Tests', () => {

@@ -1,12 +1,10 @@
-/* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import { TaskService } from 'app/entities/course/task/task.service';
-import { ITask, Task, TaskType } from 'app/shared/model/task.model';
-import { MachineType } from 'app/shared/model/section.model';
+import { TaskService } from 'app/entities/task/task.service';
+import { ITask, Task } from 'app/shared/model/task.model';
+import { TaskType } from 'app/shared/model/enumerations/task-type.model';
+import { MachineType } from 'app/shared/model/enumerations/machine-type.model';
 
 describe('Service Tests', () => {
     describe('Task Service', () => {
@@ -14,10 +12,12 @@ describe('Service Tests', () => {
         let service: TaskService;
         let httpMock: HttpTestingController;
         let elemDefault: ITask;
+        let expectedResult;
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [HttpClientTestingModule]
             });
+            expectedResult = {};
             injector = getTestBed();
             service = injector.get(TaskService);
             httpMock = injector.get(HttpTestingController);
@@ -25,19 +25,20 @@ describe('Service Tests', () => {
             elemDefault = new Task('ID', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', TaskType.SHORTCUT, MachineType.ANY);
         });
 
-        describe('Service methods', async () => {
-            it('should find an element', async () => {
+        describe('Service methods', () => {
+            it('should find an element', () => {
                 const returnedFromService = Object.assign({}, elemDefault);
                 service
                     .find('123')
                     .pipe(take(1))
-                    .subscribe(resp => expect(resp).toMatchObject({ body: elemDefault }));
+                    .subscribe(resp => (expectedResult = resp));
 
                 const req = httpMock.expectOne({ method: 'GET' });
-                req.flush(JSON.stringify(returnedFromService));
+                req.flush(returnedFromService);
+                expect(expectedResult).toMatchObject({ body: elemDefault });
             });
 
-            it('should create a Task', async () => {
+            it('should create a Task', () => {
                 const returnedFromService = Object.assign(
                     {
                         id: 'ID'
@@ -48,12 +49,13 @@ describe('Service Tests', () => {
                 service
                     .create(new Task(null))
                     .pipe(take(1))
-                    .subscribe(resp => expect(resp).toMatchObject({ body: expected }));
+                    .subscribe(resp => (expectedResult = resp));
                 const req = httpMock.expectOne({ method: 'POST' });
-                req.flush(JSON.stringify(returnedFromService));
+                req.flush(returnedFromService);
+                expect(expectedResult).toMatchObject({ body: expected });
             });
 
-            it('should update a Task', async () => {
+            it('should update a Task', () => {
                 const returnedFromService = Object.assign(
                     {
                         question: 'BBBBBB',
@@ -69,12 +71,13 @@ describe('Service Tests', () => {
                 service
                     .update(expected)
                     .pipe(take(1))
-                    .subscribe(resp => expect(resp).toMatchObject({ body: expected }));
+                    .subscribe(resp => (expectedResult = resp));
                 const req = httpMock.expectOne({ method: 'PUT' });
-                req.flush(JSON.stringify(returnedFromService));
+                req.flush(returnedFromService);
+                expect(expectedResult).toMatchObject({ body: expected });
             });
 
-            it('should return a list of Task', async () => {
+            it('should return a list of Task', () => {
                 const returnedFromService = Object.assign(
                     {
                         question: 'BBBBBB',
@@ -92,17 +95,19 @@ describe('Service Tests', () => {
                         take(1),
                         map(resp => resp.body)
                     )
-                    .subscribe(body => expect(body).toContainEqual(expected));
+                    .subscribe(body => (expectedResult = body));
                 const req = httpMock.expectOne({ method: 'GET' });
-                req.flush(JSON.stringify([returnedFromService]));
+                req.flush([returnedFromService]);
                 httpMock.verify();
+                expect(expectedResult).toContainEqual(expected);
             });
 
-            it('should delete a Task', async () => {
-                const rxPromise = service.delete('123').subscribe(resp => expect(resp.ok));
+            it('should delete a Task', () => {
+                service.delete('123').subscribe(resp => (expectedResult = resp.ok));
 
                 const req = httpMock.expectOne({ method: 'DELETE' });
                 req.flush({ status: 200 });
+                expect(expectedResult);
             });
         });
 

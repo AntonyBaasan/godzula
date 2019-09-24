@@ -1,12 +1,11 @@
-/* tslint:disable max-line-length */
 import { ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { GodzulawebTestModule } from '../../../test.module';
-import { TaskDeleteDialogComponent } from 'app/entities/course/task/task-delete-dialog.component';
-import { TaskService } from 'app/entities/course/task/task.service';
+import { TaskDeleteDialogComponent } from 'app/entities/task/task-delete-dialog.component';
+import { TaskService } from 'app/entities/task/task.service';
 
 describe('Component Tests', () => {
     describe('Task Management Delete Component', () => {

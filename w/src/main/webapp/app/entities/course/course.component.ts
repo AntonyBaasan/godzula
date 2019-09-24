@@ -1,11 +1,12 @@
-import * as _ from 'lodash';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { ICourse } from 'app/shared/model/course.model';
-import { AccountService } from 'app/core';
+import { AccountService } from 'app/core/auth/account.service';
 import { CourseService } from './course.service';
 
 @Component({
@@ -25,29 +26,26 @@ export class CourseComponent implements OnInit, OnDestroy {
     ) {}
 
     loadAll() {
-        this.courseService.query().subscribe(
-            (res: HttpResponse<ICourse[]>) => {
-                this.courses = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.courseService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<ICourse[]>) => res.ok),
+                map((res: HttpResponse<ICourse[]>) => res.body)
+            )
+            .subscribe(
+                (res: ICourse[]) => {
+                    this.courses = res;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     ngOnInit() {
-        this.sendGA('/entity/course.html');
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInCourses();
-    }
-
-    private sendGA(pageUrl: string) {
-        const w = <any>window;
-        if (w && w.ga) {
-            w.ga('set', 'page', pageUrl);
-            w.ga('send', 'pageview');
-        }
     }
 
     ngOnDestroy() {
@@ -60,15 +58,6 @@ export class CourseComponent implements OnInit, OnDestroy {
 
     registerChangeInCourses() {
         this.eventSubscriber = this.eventManager.subscribe('courseListModification', response => this.loadAll());
-    }
-
-    clone(course: ICourse) {
-        const clone = _.cloneDeep(course);
-        clone.id = undefined;
-        clone.name = clone.name + ' (copy)';
-        this.courseService.create(clone).subscribe(response => {
-            this.courses.push(response.body);
-        });
     }
 
     protected onError(errorMessage: string) {

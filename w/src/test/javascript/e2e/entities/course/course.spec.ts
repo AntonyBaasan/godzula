@@ -1,7 +1,8 @@
-/* tslint:disable no-unused-expression */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CourseComponentsPage, CourseDeleteDialog, CourseUpdatePage } from './course.page-object';
 
 const expect = chai.expect;
@@ -24,6 +25,7 @@ describe('Course e2e test', () => {
     it('should load Courses', async () => {
         await navBarPage.goToEntity('course');
         courseComponentsPage = new CourseComponentsPage();
+        await browser.wait(ec.visibilityOf(courseComponentsPage.title), 5000);
         expect(await courseComponentsPage.getTitle()).to.eq('Courses');
     });
 
@@ -44,13 +46,13 @@ describe('Course e2e test', () => {
             courseUpdatePage.setImageUrlInput('imageUrl'),
             courseUpdatePage.statusSelectLastOption()
         ]);
-        expect(await courseUpdatePage.getNameInput()).to.eq('name');
-        expect(await courseUpdatePage.getDescriptionInput()).to.eq('description');
-        expect(await courseUpdatePage.getImageUrlInput()).to.eq('imageUrl');
+        expect(await courseUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await courseUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
+        expect(await courseUpdatePage.getImageUrlInput()).to.eq('imageUrl', 'Expected ImageUrl value to be equals to imageUrl');
         await courseUpdatePage.save();
-        expect(await courseUpdatePage.getSaveButton().isPresent()).to.be.false;
+        expect(await courseUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-        expect(await courseComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1);
+        expect(await courseComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
     });
 
     it('should delete last Course', async () => {

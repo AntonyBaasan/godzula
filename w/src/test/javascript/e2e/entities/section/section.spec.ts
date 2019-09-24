@@ -1,7 +1,8 @@
-/* tslint:disable no-unused-expression */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { SectionComponentsPage, SectionDeleteDialog, SectionUpdatePage } from './section.page-object';
 
 const expect = chai.expect;
@@ -24,6 +25,7 @@ describe('Section e2e test', () => {
     it('should load Sections', async () => {
         await navBarPage.goToEntity('section');
         sectionComponentsPage = new SectionComponentsPage();
+        await browser.wait(ec.visibilityOf(sectionComponentsPage.title), 5000);
         expect(await sectionComponentsPage.getTitle()).to.eq('Sections');
     });
 
@@ -42,14 +44,18 @@ describe('Section e2e test', () => {
             sectionUpdatePage.setNameInput('name'),
             sectionUpdatePage.setDescriptionInput('description'),
             sectionUpdatePage.statusSelectLastOption(),
-            sectionUpdatePage.targetMachineSelectLastOption()
+            sectionUpdatePage.targetMachineSelectLastOption(),
+            sectionUpdatePage.courseSelectLastOption()
         ]);
-        expect(await sectionUpdatePage.getNameInput()).to.eq('name');
-        expect(await sectionUpdatePage.getDescriptionInput()).to.eq('description');
+        expect(await sectionUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await sectionUpdatePage.getDescriptionInput()).to.eq(
+            'description',
+            'Expected Description value to be equals to description'
+        );
         await sectionUpdatePage.save();
-        expect(await sectionUpdatePage.getSaveButton().isPresent()).to.be.false;
+        expect(await sectionUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-        expect(await sectionComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1);
+        expect(await sectionComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
     });
 
     it('should delete last Section', async () => {

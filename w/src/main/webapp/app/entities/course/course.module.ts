@@ -1,30 +1,18 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { GodzulawebSharedModule } from 'app/shared';
-import {
-    CourseComponent,
-    CourseDetailComponent,
-    CourseUpdateComponent,
-    CourseDeletePopupComponent,
-    CourseDeleteDialogComponent,
-    courseRoute,
-    coursePopupRoute
-} from './';
-import { GodzulawebSectionModule } from './section/section.module';
-// import { GodzulawebKeyinputModule } from './keyinput/keyinput.module';
+import { GodzulawebSharedModule } from 'app/shared/shared.module';
+import { CourseComponent } from './course.component';
+import { CourseDetailComponent } from './course-detail.component';
+import { CourseUpdateComponent } from './course-update.component';
+import { CourseDeletePopupComponent, CourseDeleteDialogComponent } from './course-delete-dialog.component';
+import { courseRoute, coursePopupRoute } from './course.route';
 
 const ENTITY_STATES = [...courseRoute, ...coursePopupRoute];
 
 @NgModule({
-    imports: [
-        GodzulawebSectionModule,
-        // GodzulawebKeyinputModule,
-        GodzulawebSharedModule,
-        RouterModule.forChild(ENTITY_STATES)
-    ],
+    imports: [GodzulawebSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [CourseComponent, CourseDetailComponent, CourseUpdateComponent, CourseDeleteDialogComponent, CourseDeletePopupComponent],
-    entryComponents: [CourseComponent, CourseUpdateComponent, CourseDeleteDialogComponent, CourseDeletePopupComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    entryComponents: [CourseComponent, CourseUpdateComponent, CourseDeleteDialogComponent, CourseDeletePopupComponent]
 })
 export class GodzulawebCourseModule {}

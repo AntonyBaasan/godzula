@@ -1,10 +1,9 @@
-/* tslint:disable max-line-length */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { GodzulawebTestModule } from '../../../test.module';
-import { TaskDetailComponent } from 'app/entities/course/task/task-detail.component';
+import { TaskDetailComponent } from 'app/entities/task/task-detail.component';
 import { Task } from 'app/shared/model/task.model';
 
 describe('Component Tests', () => {
@@ -26,7 +25,15 @@ describe('Component Tests', () => {
         });
 
         describe('OnInit', () => {
-            it('Should call load all on init', () => {});
+            it('Should call load all on init', () => {
+                // GIVEN
+
+                // WHEN
+                comp.ngOnInit();
+
+                // THEN
+                expect(comp.task).toEqual(jasmine.objectContaining({ id: '123' }));
+            });
         });
     });
 });

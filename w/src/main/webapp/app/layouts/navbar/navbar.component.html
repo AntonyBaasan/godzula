@@ -34,6 +34,18 @@
                             <span>Course</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="section" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span>Section</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="task" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span>Task</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

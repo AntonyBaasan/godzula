@@ -9,7 +9,6 @@ import { ICourse } from 'app/shared/model/course.model';
 })
 export class CourseDetailComponent implements OnInit {
     course: ICourse;
-    showSections = false;
 
     constructor(protected activatedRoute: ActivatedRoute) {}
 
@@ -21,16 +20,5 @@ export class CourseDetailComponent implements OnInit {
 
     previousState() {
         window.history.back();
-    }
-
-    toggleSections() {
-        this.showSections = !this.showSections;
-    }
-
-    getSectionCount() {
-        if (this.course && this.course.sections) {
-            return this.course.sections.length;
-        }
-        return 0;
     }
 }

@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CourseService } from 'app/entities/course';
+import { CourseService } from 'app/entities/course/course.service';
 import { ICourse } from '../../shared/model/course.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { CourseStateFacade } from '../../state/course/course.facade';

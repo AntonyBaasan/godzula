@@ -27,6 +27,7 @@ export class SectionUpdateComponent implements OnInit {
         description: [],
         status: [],
         targetMachine: [],
+        order: [],
         courseId: []
     });
 
@@ -59,6 +60,7 @@ export class SectionUpdateComponent implements OnInit {
             description: section.description,
             status: section.status,
             targetMachine: section.targetMachine,
+            order: section.order,
             courseId: section.courseId
         });
     }
@@ -85,6 +87,7 @@ export class SectionUpdateComponent implements OnInit {
             description: this.editForm.get(['description']).value,
             status: this.editForm.get(['status']).value,
             targetMachine: this.editForm.get(['targetMachine']).value,
+            order: this.editForm.get(['order']).value,
             courseId: this.editForm.get(['courseId']).value
         };
     }

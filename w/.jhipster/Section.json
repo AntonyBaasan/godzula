@@ -12,7 +12,8 @@
             "relationshipName": "course",
             "otherEntityName": "course",
             "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "section"
         }
     ],
     "fields": [
@@ -36,12 +37,17 @@
             "fieldName": "targetMachine",
             "fieldType": "MachineType",
             "fieldValues": "ANY,WIN,MAC"
+        },
+        {
+            "fieldName": "order",
+            "fieldType": "Integer"
         }
     ],
     "dto": "mapstruct",
     "searchEngine": false,
     "service": "serviceImpl",
     "entityTableName": "section",
+    "databaseType": "mongodb",
     "jpaMetamodelFiltering": false,
     "pagination": "no"
 }

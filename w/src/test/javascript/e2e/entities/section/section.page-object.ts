@@ -30,6 +30,7 @@ export class SectionUpdatePage {
     descriptionInput = element(by.id('field_description'));
     statusSelect = element(by.id('field_status'));
     targetMachineSelect = element(by.id('field_targetMachine'));
+    orderInput = element(by.id('field_order'));
     courseSelect = element(by.id('field_course'));
 
     async getPageTitle() {
@@ -80,6 +81,14 @@ export class SectionUpdatePage {
             .all(by.tagName('option'))
             .last()
             .click();
+    }
+
+    async setOrderInput(order) {
+        await this.orderInput.sendKeys(order);
+    }
+
+    async getOrderInput() {
+        return await this.orderInput.getAttribute('value');
     }
 
     async courseSelectLastOption(timeout?: number) {

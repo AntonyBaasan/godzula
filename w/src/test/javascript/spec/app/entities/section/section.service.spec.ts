@@ -22,7 +22,7 @@ describe('Service Tests', () => {
             service = injector.get(SectionService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Section('ID', 'AAAAAAA', 'AAAAAAA', SectionStatus.DRAFT, MachineType.ANY);
+            elemDefault = new Section('ID', 'AAAAAAA', 'AAAAAAA', SectionStatus.DRAFT, MachineType.ANY, 0);
         });
 
         describe('Service methods', () => {
@@ -61,7 +61,8 @@ describe('Service Tests', () => {
                         name: 'BBBBBB',
                         description: 'BBBBBB',
                         status: 'BBBBBB',
-                        targetMachine: 'BBBBBB'
+                        targetMachine: 'BBBBBB',
+                        order: 1
                     },
                     elemDefault
                 );
@@ -82,7 +83,8 @@ describe('Service Tests', () => {
                         name: 'BBBBBB',
                         description: 'BBBBBB',
                         status: 'BBBBBB',
-                        targetMachine: 'BBBBBB'
+                        targetMachine: 'BBBBBB',
+                        order: 1
                     },
                     elemDefault
                 );

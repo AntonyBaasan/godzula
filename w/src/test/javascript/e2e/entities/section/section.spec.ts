@@ -45,6 +45,7 @@ describe('Section e2e test', () => {
             sectionUpdatePage.setDescriptionInput('description'),
             sectionUpdatePage.statusSelectLastOption(),
             sectionUpdatePage.targetMachineSelectLastOption(),
+            sectionUpdatePage.setOrderInput('5'),
             sectionUpdatePage.courseSelectLastOption()
         ]);
         expect(await sectionUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
@@ -52,6 +53,7 @@ describe('Section e2e test', () => {
             'description',
             'Expected Description value to be equals to description'
         );
+        expect(await sectionUpdatePage.getOrderInput()).to.eq('5', 'Expected order value to be equals to 5');
         await sectionUpdatePage.save();
         expect(await sectionUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

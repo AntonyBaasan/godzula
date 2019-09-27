@@ -7,7 +7,7 @@ import { Account } from 'app/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICourse } from 'app/shared/model/course.model';
 import { SectionListItem } from './section-list/section-list.component';
-import { ISection, MachineType } from 'app/shared/model/section.model';
+import { ISection } from 'app/shared/model/section.model';
 import { CourseStateFacade } from 'app/state/course/course.facade';
 import { Observable } from 'rxjs';
 
@@ -97,11 +97,6 @@ export class CoursePageComponent implements OnInit {
     getSelectedSectionDevice() {
         if (!this.course) {
             return '';
-        }
-        if (this.course.targetMachine === MachineType.MAC) {
-            return 'Mac';
-        } else {
-            return 'Win';
         }
     }
 

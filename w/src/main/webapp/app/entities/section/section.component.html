@@ -22,6 +22,7 @@
             <th><span>Description</span></th>
             <th><span>Status</span></th>
             <th><span>Target Machine</span></th>
+            <th><span>Order</span></th>
             <th><span>Course</span></th>
             <th></th>
             </tr>
@@ -33,6 +34,7 @@
                 <td>{{section.description}}</td>
                 <td>{{section.status}}</td>
                 <td>{{section.targetMachine}}</td>
+                <td>{{section.order}}</td>
                 <td>
                     <div *ngIf="section.courseId">
                         <a [routerLink]="['/course', section.courseId , 'view' ]" >{{section.courseId}}</a>

@@ -8,6 +8,7 @@ export interface ISection {
     description?: string;
     status?: SectionStatus;
     targetMachine?: MachineType;
+    order?: number;
     tasks?: ITask[];
     courseId?: string;
 }
@@ -19,6 +20,7 @@ export class Section implements ISection {
         public description?: string,
         public status?: SectionStatus,
         public targetMachine?: MachineType,
+        public order?: number,
         public tasks?: ITask[],
         public courseId?: string
     ) {}

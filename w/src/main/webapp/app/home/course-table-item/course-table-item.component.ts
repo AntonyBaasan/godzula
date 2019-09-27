@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ICourse } from 'app/shared/model/course.model';
-import { MachineType } from 'app/shared/model/section.model';
 
 @Component({
     selector: 'jhi-course-table-item',
@@ -19,15 +18,6 @@ export class CourseTableItemComponent implements OnInit {
     }
 
     getDeviceName() {
-        if (this.course.targetMachine === MachineType.MAC) {
-            return 'Mac';
-        }
-        if (this.course.targetMachine === MachineType.WIN) {
-            return 'Win';
-        }
-        if (this.course.targetMachine === MachineType.ANY) {
-            return 'Mac/Win';
-        }
         return '';
     }
 

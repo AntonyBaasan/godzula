@@ -55,6 +55,9 @@ public class SectionResourceIntTest {
     private static final MachineType DEFAULT_TARGET_MACHINE = MachineType.ANY;
     private static final MachineType UPDATED_TARGET_MACHINE = MachineType.WIN;
 
+    private static final Integer DEFAULT_ORDER = 1;
+    private static final Integer UPDATED_ORDER = 2;
+
     @Autowired
     private SectionRepository sectionRepository;
 
@@ -103,7 +106,8 @@ public class SectionResourceIntTest {
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
             .status(DEFAULT_STATUS)
-            .targetMachine(DEFAULT_TARGET_MACHINE);
+            .targetMachine(DEFAULT_TARGET_MACHINE)
+            .order(DEFAULT_ORDER);
         return section;
     }
 
@@ -132,6 +136,7 @@ public class SectionResourceIntTest {
         assertThat(testSection.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testSection.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testSection.getTargetMachine()).isEqualTo(DEFAULT_TARGET_MACHINE);
+        assertThat(testSection.getOrder()).isEqualTo(DEFAULT_ORDER);
     }
 
     @Test
@@ -184,7 +189,8 @@ public class SectionResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].targetMachine").value(hasItem(DEFAULT_TARGET_MACHINE.toString())));
+            .andExpect(jsonPath("$.[*].targetMachine").value(hasItem(DEFAULT_TARGET_MACHINE.toString())))
+            .andExpect(jsonPath("$.[*].order").value(hasItem(DEFAULT_ORDER)));
     }
     
     @Test
@@ -200,7 +206,8 @@ public class SectionResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.targetMachine").value(DEFAULT_TARGET_MACHINE.toString()));
+            .andExpect(jsonPath("$.targetMachine").value(DEFAULT_TARGET_MACHINE.toString()))
+            .andExpect(jsonPath("$.order").value(DEFAULT_ORDER));
     }
 
     @Test
@@ -223,7 +230,8 @@ public class SectionResourceIntTest {
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .status(UPDATED_STATUS)
-            .targetMachine(UPDATED_TARGET_MACHINE);
+            .targetMachine(UPDATED_TARGET_MACHINE)
+            .order(UPDATED_ORDER);
         SectionDTO sectionDTO = sectionMapper.toDto(updatedSection);
 
         restSectionMockMvc.perform(put("/api/sections")
@@ -239,6 +247,7 @@ public class SectionResourceIntTest {
         assertThat(testSection.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSection.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testSection.getTargetMachine()).isEqualTo(UPDATED_TARGET_MACHINE);
+        assertThat(testSection.getOrder()).isEqualTo(UPDATED_ORDER);
     }
 
     @Test

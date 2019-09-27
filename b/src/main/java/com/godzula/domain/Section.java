@@ -41,6 +41,9 @@ public class Section implements Serializable {
     @Field("target_machine")
     private MachineType targetMachine;
 
+    @Field("order")
+    private Integer order;
+
     @DBRef
     @Field("task")
     private Set<Task> tasks = new HashSet<>();
@@ -110,6 +113,19 @@ public class Section implements Serializable {
         this.targetMachine = targetMachine;
     }
 
+    public Integer getOrder() {
+        return order;
+    }
+
+    public Section order(Integer order) {
+        this.order = order;
+        return this;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
     public Set<Task> getTasks() {
         return tasks;
     }
@@ -177,6 +193,7 @@ public class Section implements Serializable {
             ", description='" + getDescription() + "'" +
             ", status='" + getStatus() + "'" +
             ", targetMachine='" + getTargetMachine() + "'" +
+            ", order=" + getOrder() +
             "}";
     }
 }

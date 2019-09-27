@@ -22,6 +22,8 @@ public class SectionDTO implements Serializable {
 
     private MachineType targetMachine;
 
+    private Integer order;
+
     private String courseId;
 
     public String getId() {
@@ -64,6 +66,14 @@ public class SectionDTO implements Serializable {
         this.targetMachine = targetMachine;
     }
 
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
     public String getCourseId() {
         return courseId;
     }
@@ -101,6 +111,7 @@ public class SectionDTO implements Serializable {
             ", description='" + getDescription() + "'" +
             ", status='" + getStatus() + "'" +
             ", targetMachine='" + getTargetMachine() + "'" +
+            ", order=" + getOrder() +
             ", course=" + getCourseId() +
             "}";
     }

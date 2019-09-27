@@ -36,6 +36,10 @@
             "fieldName": "targetMachine",
             "fieldType": "MachineType",
             "fieldValues": "ANY,WIN,MAC"
+        },
+        {
+            "fieldName": "order",
+            "fieldType": "Integer"
         }
     ],
     "dto": "mapstruct",

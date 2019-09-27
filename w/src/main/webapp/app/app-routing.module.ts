@@ -11,6 +11,18 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
             [
                 ...LAYOUT_ROUTES,
                 {
+                    path: 'course',
+                    loadChildren: () => import('./entities/course/course.module').then(m => m.GodzulawebCourseModule)
+                },
+                {
+                    path: 'section',
+                    loadChildren: () => import('./entities/section/section.module').then(m => m.GodzulawebSectionModule)
+                },
+                {
+                    path: 'task',
+                    loadChildren: () => import('./entities/task/task.module').then(m => m.GodzulawebTaskModule)
+                },
+                {
                     path: 'admin',
                     loadChildren: './admin/admin.module#GodzulawebAdminModule'
                 }

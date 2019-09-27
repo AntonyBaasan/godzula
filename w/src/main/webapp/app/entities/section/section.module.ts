@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { GodzulawebSharedModule } from 'app/shared/shared.module';
 import { SectionComponent } from './section.component';
@@ -11,7 +12,7 @@ import { sectionRoute, sectionPopupRoute } from './section.route';
 const ENTITY_STATES = [...sectionRoute, ...sectionPopupRoute];
 
 @NgModule({
-    imports: [GodzulawebSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [ReactiveFormsModule, GodzulawebSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         SectionComponent,
         SectionDetailComponent,

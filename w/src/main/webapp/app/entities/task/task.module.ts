@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { GodzulawebSharedModule } from 'app/shared/shared.module';
 import { TaskComponent } from './task.component';
@@ -11,7 +12,7 @@ import { taskRoute, taskPopupRoute } from './task.route';
 const ENTITY_STATES = [...taskRoute, ...taskPopupRoute];
 
 @NgModule({
-    imports: [GodzulawebSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [GodzulawebSharedModule, ReactiveFormsModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [TaskComponent, TaskDetailComponent, TaskUpdateComponent, TaskDeleteDialogComponent, TaskDeletePopupComponent],
     entryComponents: [TaskComponent, TaskUpdateComponent, TaskDeleteDialogComponent, TaskDeletePopupComponent]
 })

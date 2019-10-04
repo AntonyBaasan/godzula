@@ -1,0 +1,2 @@
+cd w
+npm install

@@ -3,6 +3,10 @@ jdk:
     - openjdk8
 node_js: "10"
 
+cache:
+  directories:
+  - $HOME/.m2
+
 before_script:
   - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
 script:

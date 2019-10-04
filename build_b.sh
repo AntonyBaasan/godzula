@@ -1,0 +1,2 @@
+cd b
+./build.sh

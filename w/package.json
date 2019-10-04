@@ -141,7 +141,7 @@
         "webpack:test": "npm run test",
         "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
         "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js",
-        "deploy": "$(npm bin)/netlify deploy --prod -d build/www"
+        "deploy": "firebase deploy --token $FIREBASE_TOKEN"
     },
     "jestSonar": {
         "reportPath": "build/test-results/jest",

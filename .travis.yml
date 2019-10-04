@@ -13,4 +13,7 @@ before_script:
 script:
   - ./build_b.sh
 deploy:
-  - ./deploy_b.sh
+  provider: script
+  script: bash deploy_b.sh
+  on:
+    branch: deploy

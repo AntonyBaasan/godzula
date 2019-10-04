@@ -6,8 +6,11 @@ node_js: "10"
 cache:
   directories:
   - $HOME/.m2
+  - w/node_modules
 
 before_script:
   - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
 script:
+  - ./build_b.sh
+deploy:
   - ./deploy_b.sh

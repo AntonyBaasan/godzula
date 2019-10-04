@@ -13,6 +13,7 @@ before_script:
 script:
   - ./build_b.sh
 deploy:
+  skip_cleanup: true
   provider: script
   script: bash deploy_b.sh
   on:

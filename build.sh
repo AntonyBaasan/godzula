@@ -2,10 +2,10 @@
 LATEST_COMMIT=$(git rev-parse HEAD)
 
 # latest commit where /w was changed
-WEB_COMMIT=$(git log -1 --format=format:%H --full-diff w)
+WEB_COMMIT=$(git log -1 --format=format:%H --full-diff w/)
 
 # latest commit where /b was changed
-API_COMMIT=$(git log -1 --format=format:%H --full-diff b)
+API_COMMIT=$(git log -1 --format=format:%H --full-diff b/)
 
 if [ $LATEST_COMMIT = $WEB_COMMIT ];
     then

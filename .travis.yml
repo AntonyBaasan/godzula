@@ -9,8 +9,7 @@ cache:
     - $HOME/.npm
 
 script:
-  - ./build_w.sh
-  - ./build_b.sh
+  - ./build.sh
 
 before_deploy:
   - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh

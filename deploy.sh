@@ -14,7 +14,7 @@ if [ $LATEST_COMMIT = $WEB_COMMIT ];
 elif [ $LATEST_COMMIT = $API_COMMIT ];
     then
         echo "files in b has changed"
-        ./weploy_b.sh
+        ./deploy_b.sh
 else
      echo "no folders of relevance has changed"
      exit 0;

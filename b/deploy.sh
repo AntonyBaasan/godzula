@@ -2,4 +2,3 @@
 
 heroku plugins:install java
 heroku deploy:jar target/*.war --app api-godzula
-

@@ -10,7 +10,7 @@ API_COMMIT=$(git log -1 --format=format:%H --full-diff api/)
 if [ -z $WEB_COMMIT ]
     then
         echo "no change inside 'web' directory"
-elif [ && $LATEST_COMMIT = $WEB_COMMIT ]
+elif [ $LATEST_COMMIT = $WEB_COMMIT ]
     then
         echo "files in 'web' has changed"
         cd web

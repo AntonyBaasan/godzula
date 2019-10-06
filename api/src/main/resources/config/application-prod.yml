@@ -27,8 +27,8 @@ spring:
             enabled: false
     data:
         mongodb:
-            uri: mongodb://localhost:27017
-            database: godzula
+            uri: mongodb://${MLAB_USERNAME}:${MLAB_PASSWORD}@ds121814.mlab.com:21814/godzula
+            database: godzula2
     mail:
         host: localhost
         port: 25

@@ -27,5 +27,6 @@ if [ $LATEST_COMMIT = $API_COMMIT ];
     then
         echo "files in 'api' has changed"
         cd "$CWD/api"
-        ./deploy.sh
+        heroku plugins:install java
+        heroku deploy:jar target/*.war --app api-godzula
 fi

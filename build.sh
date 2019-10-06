@@ -7,13 +7,15 @@ WEB_COMMIT=$(git log -1 --format=format:%H --full-diff web/)
 # latest commit where /b was changed
 API_COMMIT=$(git log -1 --format=format:%H --full-diff api/)
 
+CWD=$(pwd)
+
 if [ -z $WEB_COMMIT ]
     then
         echo "no change inside 'web' directory"
 elif [ $LATEST_COMMIT = $WEB_COMMIT ]
     then
         echo "files in 'web' has changed"
-        cd web
+        cd "$CWD/web"
         npm install
         npm run build
 fi
@@ -24,6 +26,6 @@ if [ -z $API_COMMIT ]
 elif [ $LATEST_COMMIT = $API_COMMIT ];
     then
         echo "files in 'api' has changed"
-        cd api
+        cd "$CWD/api"
         ./build.sh
 fi

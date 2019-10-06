@@ -17,6 +17,7 @@ elif [ $LATEST_COMMIT = $WEB_COMMIT ]
         echo "files in 'web' has changed"
         cd "$CWD/web"
         npm install
+        npm run test
         npm run build
 fi
 

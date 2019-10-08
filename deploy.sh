@@ -23,7 +23,7 @@ fi
 if [ -z $API_COMMIT ]
     then
         echo "no change inside 'api' directory"
-if [ $LATEST_COMMIT = $API_COMMIT ];
+elif [ $LATEST_COMMIT = $API_COMMIT ];
     then
         echo "files in 'api' has changed"
         cd "$CWD/api"

@@ -27,6 +27,7 @@ spring:
             enabled: false
     data:
         mongodb:
+            # this configuration doesn't work with (this works spring.data.mongodb.database)
             uri: mongodb://${MLAB_USERNAME}:${MLAB_PASSWORD}@ds121814.mlab.com:21814/godzula
             database: godzula
     mail:

@@ -14,8 +14,8 @@ export class CourseEffects {
     loadCourses$ = this.actions$.pipe(
         ofType(CourseActionTypes.CourseLoad),
         mergeMap(() =>
-            // this.courseSerivce.queryMetadata().pipe(
-            this.courseSerivce.query().pipe(
+            this.courseSerivce.queryMetadata().pipe(
+                // this.courseSerivce.query().pipe(
                 map(res => ({
                     type: CourseActionTypes.CourseLoaded,
                     payload: res.body

@@ -40,4 +40,6 @@ public interface CourseService {
      * @param id the id of the entity
      */
     void delete(String id);
+
+    List<CourseDTO> findAllPublished();
 }

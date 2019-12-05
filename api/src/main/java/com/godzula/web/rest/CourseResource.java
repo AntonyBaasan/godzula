@@ -9,6 +9,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -84,8 +85,13 @@ public class CourseResource {
      */
     @GetMapping("/courses")
     @Timed
-    public List<CourseDTO> getAllCourses() {
+    public List<CourseDTO> getAllCourses(Authentication authentication) {
         log.debug("REST request to get all Courses");
+        if (authentication == null) {
+            log.debug("isAuth: " + false);
+            return courseService.findAllPublished();
+        }
+        log.debug("isAuth: " + authentication.isAuthenticated());
         return courseService.findAll();
     }
 
@@ -115,5 +121,12 @@ public class CourseResource {
         log.debug("REST request to delete Course : {}", id);
         courseService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
+    }
+
+    @GetMapping("/courses/metadata")
+    @Timed
+    public List<CourseDTO> getAllCoursesMetadata() {
+        log.debug("REST request to get all Courses metadata");
+        return courseService.findAllPublished();
     }
 }

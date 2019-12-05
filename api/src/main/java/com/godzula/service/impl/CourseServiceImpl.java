@@ -1,5 +1,6 @@
 package com.godzula.service.impl;
 
+import com.godzula.domain.enumeration.CourseStatus;
 import com.godzula.service.CourseService;
 import com.godzula.domain.Course;
 import com.godzula.repository.CourseRepository;
@@ -84,4 +85,11 @@ public class CourseServiceImpl implements CourseService {
         log.debug("Request to delete Course : {}", id);
         courseRepository.deleteById(id);
     }
+
+    @Override
+    public List<CourseDTO> findAllPublished() {
+        return courseRepository.findAllByStatus(CourseStatus.PUBLISHED).stream()
+            .map(courseMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    };
 }

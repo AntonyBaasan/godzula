@@ -20,9 +20,7 @@ elif [ $LATEST_COMMIT = $WEB_COMMIT ]
     then
         echo "files in 'web' has changed"
         cd "$CWD/web"
-        npm install
-        npm run test
-        npm run build
+        npm install && npm run test && npm run build
 fi
 
 if [ -z $API_COMMIT ]

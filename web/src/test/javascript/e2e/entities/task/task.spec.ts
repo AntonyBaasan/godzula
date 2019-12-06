@@ -52,6 +52,7 @@ describe('Task e2e test', () => {
         expect(await taskUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
         expect(await taskUpdatePage.getAnswerInput()).to.eq('answer', 'Expected Answer value to be equals to answer');
         await taskUpdatePage.save();
+        // tslint:disable-next-line:no-unused-expression
         expect(await taskUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
         expect(await taskComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');

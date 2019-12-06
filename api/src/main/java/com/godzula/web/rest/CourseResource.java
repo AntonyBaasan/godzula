@@ -87,11 +87,6 @@ public class CourseResource {
     @Timed
     public List<CourseDTO> getAllCourses(Authentication authentication) {
         log.debug("REST request to get all Courses");
-        if (authentication == null) {
-            log.debug("isAuth: " + false);
-            return courseService.findAllPublished();
-        }
-        log.debug("isAuth: " + authentication.isAuthenticated());
         return courseService.findAll();
     }
 

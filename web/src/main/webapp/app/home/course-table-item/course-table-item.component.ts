@@ -17,10 +17,6 @@ export class CourseTableItemComponent implements OnInit {
         console.log('Hello world!');
     }
 
-    getDeviceName() {
-        return '';
-    }
-
     trimString(text: string, len: number, add: string) {
         if (text) {
             return text.length > len ? text.slice(0, len) + '..' : text;

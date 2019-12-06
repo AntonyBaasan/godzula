@@ -55,6 +55,7 @@ describe('Section e2e test', () => {
         );
         expect(await sectionUpdatePage.getOrderInput()).to.eq('5', 'Expected order value to be equals to 5');
         await sectionUpdatePage.save();
+        // tslint:disable-next-line:no-unused-expression
         expect(await sectionUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
         expect(await sectionComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');

@@ -185,7 +185,7 @@ public class CourseResourceIntTest {
             .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
-    
+
     @Test
     public void getCourse() throws Exception {
         // Initialize the database
@@ -302,5 +302,6 @@ public class CourseResourceIntTest {
         assertThat(courseDTO1).isNotEqualTo(courseDTO2);
         courseDTO1.setId(null);
         assertThat(courseDTO1).isNotEqualTo(courseDTO2);
+        
     }
 }

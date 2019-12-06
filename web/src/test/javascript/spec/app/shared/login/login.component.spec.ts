@@ -70,7 +70,7 @@ describe('Component Tests', () => {
                 tick(); // simulate async
 
                 // THEN
-                expect(comp.authenticationError).toEqual(true);
+                expect(comp.authenticationError).toEqual(false);
                 expect(mockActiveModal.dismissSpy).toHaveBeenCalledWith('login success');
                 expect(mockEventManager.broadcastSpy).toHaveBeenCalledTimes(1);
                 expect(mockLoginService.loginSpy).toHaveBeenCalledWith(credentials);

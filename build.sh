@@ -1,3 +1,5 @@
+set -e
+
 # latest commit
 LATEST_COMMIT=$(git rev-parse HEAD)
 
@@ -18,19 +20,26 @@ echo 'starting... '
 if [ -z $WEB_COMMIT ]
     then
         echo "no change inside 'web' directory"
-elif [ $LATEST_COMMIT = $WEB_COMMIT ]
-    then
-        echo "files in 'web' has changed" \
+elif [ $LATEST_COMMIT = $WEB_COMMIT ] \
+        && echo "files in 'web' has changed" \
         && cd "$CWD/web" \
         && npm install && npm run test && npm run build
+    then
+    echo "web done."
+else
+    exit 1
 fi
 
 if [ -z $API_COMMIT ]
     then
         echo "no change inside 'api' directory"
-elif [ $LATEST_COMMIT = $API_COMMIT ];
-    then
+elif [ $LATEST_COMMIT = $API_COMMIT ]
         echo "files in 'api' has changed" \
         && cd "$CWD/api" \
         && ./build.sh
+    then
+    echo "api done."
+else
+    exit 1
 fi
+exit 0

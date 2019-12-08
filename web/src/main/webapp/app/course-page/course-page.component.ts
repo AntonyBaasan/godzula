@@ -10,6 +10,7 @@ import { SectionListItem } from './section-list/section-list.component';
 import { ISection } from 'app/shared/model/section.model';
 import { CourseStateFacade } from 'app/state/course/course.facade';
 import { Observable } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'jhi-course-page',
@@ -24,7 +25,7 @@ export class CoursePageComponent implements OnInit {
     selectedSection: SectionListItem;
     sectionList: SectionListItem[];
     showHint = true;
-    error: any = null;
+    error: HttpErrorResponse = null;
 
     constructor(
         protected activatedRoute: ActivatedRoute,
@@ -51,7 +52,7 @@ export class CoursePageComponent implements OnInit {
             this.sendGA('/courses/' + this.course.id);
         });
 
-        this.courseFacade.LoadCourseDetailError().subscribe((error: any) => {
+        this.courseFacade.LoadCourseDetailError().subscribe((error: HttpErrorResponse) => {
             console.log('LoadCourseFailed: ', error);
             this.error = error;
         });
@@ -98,6 +99,10 @@ export class CoursePageComponent implements OnInit {
         if (!this.course) {
             return '';
         }
+    }
+
+    public getErrorMessage(): string {
+        return this.error.error.detail;
     }
 
     private applyOrderIntoArray(sections: ISection[]) {

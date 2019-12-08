@@ -1,6 +1,8 @@
 <div *ngIf="error">
-   {{error | json}}
    <button type="button" class="btn btn-dark" (click)="goHome()">Home</button>
+   <div class="py-4">
+      {{getErrorMessage(error)}}
+   </div>
 </div>
 
 <div *ngIf="course">
@@ -21,19 +23,13 @@
          <div class="col-12 border">
             <div class="row h-100">
                <div class="col-3 p-0">
-                  <jhi-section-list 
-                     [sectionListItem]="sectionList" 
-                     [selectedItem]="selectedSection"
+                  <jhi-section-list [sectionListItem]="sectionList" [selectedItem]="selectedSection"
                      (SectionSelect)="sectionSelected($event)">
                   </jhi-section-list>
                </div>
                <div class="col-7 border-right border-left">
-                  <jhi-section-play
-                     [showHint]="showHint" 
-                     [SectionItem]="selectedSection"
-                     [Device]="getSelectedSectionDevice()" 
-                     (SectionPassed)="sectionPass()" 
-                     (Next)="onNext()">
+                  <jhi-section-play [showHint]="showHint" [SectionItem]="selectedSection"
+                     [Device]="getSelectedSectionDevice()" (SectionPassed)="sectionPass()" (Next)="onNext()">
                   </jhi-section-play>
                </div>
                <div class="col-2">

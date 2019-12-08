@@ -12,8 +12,6 @@ import { CourseStateFacade } from '../../state/course/course.facade';
     styleUrls: ['./course-table.component.scss']
 })
 export class CourseTableComponent implements OnInit {
-    showWin = true;
-    showMac = true;
     courses$: Observable<ICourse[]>;
 
     constructor(
@@ -25,13 +23,6 @@ export class CourseTableComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.updateShowButtons(this.deviceDetectorService.os);
-    }
-
-    updateShowButtons(os: string) {
-        // for Mac OS
-        this.showMac = os === 'Mac';
-        // any other device than Mac OS
-        this.showWin = os !== 'Mac';
+        console.log(this.deviceDetectorService.os);
     }
 }

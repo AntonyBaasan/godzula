@@ -102,7 +102,14 @@ export class CoursePageComponent implements OnInit {
     }
 
     public getErrorMessage(): string {
-        return this.error.error.detail;
+        if (!this.error) {
+            return null;
+        }
+
+        if (this.error.error) {
+            return this.error.error.detail;
+        }
+        return null;
     }
 
     private applyOrderIntoArray(sections: ISection[]) {

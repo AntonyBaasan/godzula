@@ -38,11 +38,11 @@ export class CourseEffects {
                 map(res => ({
                     type: CourseActionTypes.CourseDetailsLoaded,
                     payload: {
-                        course: res.body,
-                        sections: res.body.sections,
-                        tasks: res.body.sections.reduce((acc, obj) => {
-                            return acc.concat(obj.tasks);
-                        }, [])
+                        course: res.body
+                        // sections: res.body.sections,
+                        // tasks: res.body.sections.reduce((acc, obj) => {
+                        //     return acc.concat(obj.tasks);
+                        // }, [])
                     }
                 })),
                 catchError((err: HttpErrorResponse) =>

@@ -14,9 +14,9 @@ export const initialState: TaskState = taskAdapter.getInitialState({
 
 export function taskReducer(state = initialState, action: CourseActions) {
     switch (action.type) {
-        case CourseActionTypes.CourseDetailsLoaded:
-            const tasks = action.payload.tasks;
-            return taskAdapter.addMany(tasks, state);
+        // case CourseActionTypes.CourseDetailsLoaded:
+        //     const tasks = action.payload.tasks;
+        //     return taskAdapter.addMany(tasks, state);
         default:
             return state;
     }

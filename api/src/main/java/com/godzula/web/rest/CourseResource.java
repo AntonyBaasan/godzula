@@ -118,10 +118,4 @@ public class CourseResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
 
-    @GetMapping("/courses/metadata")
-    @Timed
-    public List<CourseDTO> getAllCoursesMetadata() {
-        log.debug("REST request to get all Courses metadata");
-        return courseService.findAllPublished();
-    }
 }

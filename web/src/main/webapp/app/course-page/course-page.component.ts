@@ -21,9 +21,8 @@ export class CoursePageComponent implements OnInit {
     course$: Observable<ICourse>;
     account: Account;
     modalRef: NgbModalRef;
-    course: ICourse;
     selectedSection: SectionListItem;
-    sectionList: SectionListItem[];
+    sectionList: SectionListItem[] = [];
     showHint = true;
     error: HttpErrorResponse = null;
 
@@ -36,21 +35,23 @@ export class CoursePageComponent implements OnInit {
 
     ngOnInit() {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
-        // var id = this.activatedRoute.params['id'];
-        this.courseFacade.GetCourseInfo(id).subscribe(course => {
-            if (_.isNil(course)) {
-                return;
-            }
 
-            this.course = course;
-            this.course.sections = this.applyOrderIntoArray(this.course.sections);
-            this.sectionList = _.map(this.course.sections, section => ({ section, passed: false }));
-            // as default select first
-            this.selectedSection = this.sectionList[0];
+        this.course$ = this.courseFacade.GetCourseInfo(id);
 
-            // send info to google analytics
-            this.sendGA('/courses/' + this.course.id);
-        });
+        // this.courseFacade.GetCourseInfo(id).subscribe(course => {
+        //     if (_.isNil(course)) {
+        //         return;
+        //     }
+
+        //     this.course = course;
+        //     this.course.sections = this.applyOrderIntoArray(this.course.sections);
+        //     this.sectionList = _.map(this.course.sections, section => ({ section, passed: false }));
+        //     // as default select first
+        //     this.selectedSection = this.sectionList[0];
+
+        //     // send info to google analytics
+        //     this.sendGA('/courses/' + this.course.id);
+        // });
 
         this.courseFacade.LoadCourseDetailError().subscribe((error: HttpErrorResponse) => {
             console.log('LoadCourseFailed: ', error);
@@ -68,7 +69,7 @@ export class CoursePageComponent implements OnInit {
 
     sectionSelected(section: SectionListItem) {
         console.log(section);
-        this.selectedSection = section;
+        // this.selectedSection = section;
         (<any>window).ga('send', 'pageview');
     }
 
@@ -92,12 +93,6 @@ export class CoursePageComponent implements OnInit {
         const index = this.sectionList.indexOf(this.selectedSection);
         if (index > -1 && index < this.sectionList.length - 1) {
             this.sectionSelected(this.sectionList[index + 1]);
-        }
-    }
-
-    getSelectedSectionDevice() {
-        if (!this.course) {
-            return '';
         }
     }
 

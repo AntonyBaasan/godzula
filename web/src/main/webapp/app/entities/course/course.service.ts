@@ -15,11 +15,6 @@ export class CourseService {
 
     constructor(protected http: HttpClient) {}
 
-    queryMetadata(req?: any): Observable<EntityArrayResponseType> {
-        const options = createRequestOption(req);
-        return this.http.get<ICourse[]>(this.resourceUrl + '/metadata', { params: options, observe: 'response' });
-    }
-
     create(course: ICourse): Observable<EntityResponseType> {
         return this.http.post<ICourse>(this.resourceUrl, course, { observe: 'response' });
     }

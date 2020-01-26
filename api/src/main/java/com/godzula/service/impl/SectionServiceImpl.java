@@ -1,5 +1,6 @@
 package com.godzula.service.impl;
 
+import com.godzula.domain.enumeration.CourseStatus;
 import com.godzula.service.SectionService;
 import com.godzula.domain.Section;
 import com.godzula.repository.SectionRepository;
@@ -83,5 +84,12 @@ public class SectionServiceImpl implements SectionService {
     public void delete(String id) {
         log.debug("Request to delete Section : {}", id);
         sectionRepository.deleteById(id);
+    }
+
+    @Override
+    public List<SectionDTO> findByCourseId(String id) {
+        return sectionRepository.findByCourseId(id).stream()
+            .map(sectionMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 }

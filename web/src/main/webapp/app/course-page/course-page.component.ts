@@ -2,15 +2,16 @@ import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { Account } from 'app/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ICourse } from 'app/shared/model/course.model';
 import { SectionListItem } from './section-list/section-list.component';
 import { ISection } from 'app/shared/model/section.model';
 import { CourseStateFacade } from 'app/state/course/course.facade';
-import { Observable } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { SectionStateFacade } from 'app/state/section/section.facade';
 
 @Component({
     selector: 'jhi-course-page',
@@ -19,43 +20,45 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CoursePageComponent implements OnInit {
     course$: Observable<ICourse>;
+
+    courseId: string;
     account: Account;
-    modalRef: NgbModalRef;
+
     selectedSection: SectionListItem;
     sectionList: SectionListItem[] = [];
     showHint = true;
-    error: HttpErrorResponse = null;
+
+    modalRef: NgbModalRef;
+    error: any = null;
 
     constructor(
         protected activatedRoute: ActivatedRoute,
         private location: Location,
         private router: Router,
-        private courseFacade: CourseStateFacade
-    ) {}
+        private courseFacade: CourseStateFacade,
+        private sectionFacade: SectionStateFacade
+    ) {
+        this.courseId = this.activatedRoute.snapshot.paramMap.get('id');
+        this.course$ = this.courseFacade.GetCourseInfo(this.courseId);
+    }
 
     ngOnInit() {
-        const id = this.activatedRoute.snapshot.paramMap.get('id');
+        this.sectionFacade.GetAllSections().subscribe(sections => {
+            this.sectionList = _.map(sections, section => ({ section, passed: false }));
+            // as default select first
+            if (this.sectionList && this.sectionList.length > 0) {
+                this.selectedSection = this.sectionList[0];
+            }
 
-        this.course$ = this.courseFacade.GetCourseInfo(id);
-
-        // this.courseFacade.GetCourseInfo(id).subscribe(course => {
-        //     if (_.isNil(course)) {
-        //         return;
-        //     }
-
-        //     this.course = course;
-        //     this.course.sections = this.applyOrderIntoArray(this.course.sections);
-        //     this.sectionList = _.map(this.course.sections, section => ({ section, passed: false }));
-        //     // as default select first
-        //     this.selectedSection = this.sectionList[0];
-
-        //     // send info to google analytics
-        //     this.sendGA('/courses/' + this.course.id);
-        // });
+            // send info to google analytics
+            // this.sendGA('/courses/' + this.course.id);
+        });
 
         this.courseFacade.LoadCourseDetailError().subscribe((error: HttpErrorResponse) => {
             console.log('LoadCourseFailed: ', error);
-            this.error = error;
+            if (error) {
+                this.error = error.error;
+            }
         });
     }
 
@@ -101,8 +104,8 @@ export class CoursePageComponent implements OnInit {
             return null;
         }
 
-        if (this.error.error) {
-            return this.error.error.detail;
+        if (this.error) {
+            return this.error.detail;
         }
         return null;
     }

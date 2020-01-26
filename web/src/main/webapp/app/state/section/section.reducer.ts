@@ -14,12 +14,11 @@ export const initialState: SectionState = sectionAdapter.getInitialState({
 });
 export function sectionReducer(state = initialState, action: CourseActions | SectionActions) {
     switch (action.type) {
-        // case CourseActionTypes.CourseDetailsLoaded:
-        //     const sections = action.payload.sections;
-        //     // return sectionAdapter.addMany(sections, state);
-        //     state = sectionAdapter.removeAll(state);
-        //     const newState = sectionAdapter.addMany(sections, state);
-        //     return newState;
+        case CourseActionTypes.CourseDetailsLoaded:
+            const sections = action.payload.sections;
+            state = sectionAdapter.removeAll(state);
+            const newState = sectionAdapter.addMany(sections, state);
+            return newState;
         case SectionActionTypes.SelectSection:
             const selectedSection = action.payload;
             return { ...state, selectedSection };

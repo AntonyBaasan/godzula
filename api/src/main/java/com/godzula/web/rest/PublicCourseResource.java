@@ -2,10 +2,14 @@ package com.godzula.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.godzula.service.CourseService;
+import com.godzula.service.SectionService;
 import com.godzula.service.dto.CourseDTO;
+import com.godzula.service.dto.FullCourseDTO;
+import com.godzula.service.dto.SectionDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +28,14 @@ public class PublicCourseResource {
     private static final String ENTITY_NAME = "course";
 
     private final CourseService courseService;
+    private final SectionService sectionService;
 
-    public PublicCourseResource(CourseService courseService) {
+    public PublicCourseResource(
+        CourseService courseService,
+        SectionService sectionService
+    ) {
         this.courseService = courseService;
+        this.sectionService = sectionService;
     }
 
     @GetMapping("/courses")
@@ -44,9 +53,18 @@ public class PublicCourseResource {
      */
     @GetMapping("/courses/{id}")
     @Timed
-    public ResponseEntity<CourseDTO> getCourse(@PathVariable String id) {
+    public ResponseEntity<FullCourseDTO> getCourse(@PathVariable String id) {
         log.debug("REST request to get Course : {}", id);
         Optional<CourseDTO> courseDTO = courseService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(courseDTO);
+        if(courseDTO.isPresent()){
+            List<SectionDTO> sections = sectionService.findByCourseId(id);
+            FullCourseDTO courseWithSections = new FullCourseDTO();
+            courseWithSections.setCourse(courseDTO.get());
+            courseWithSections.setSections(sections);
+            return ResponseEntity.ok(courseWithSections);
+
+        }else{
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 }

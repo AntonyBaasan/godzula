@@ -16,5 +16,5 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends MongoRepository<Course, String> {
 
-    public List<Course> findAllByStatus(CourseStatus status);
+    List<Course> findAllByStatus(CourseStatus status);
 }

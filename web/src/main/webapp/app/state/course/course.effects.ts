@@ -33,15 +33,12 @@ export class CourseEffects {
     loadCourseDetail$ = this.actions$.pipe(
         ofType<CourseDetailsLoad>(CourseActionTypes.CourseDetailsLoad),
         mergeMap(action =>
-            this.publicCourseSerivce.find(action.payload).pipe(
+            this.publicCourseSerivce.openCourse(action.payload).pipe(
                 map(res => ({
                     type: CourseActionTypes.CourseDetailsLoaded,
                     payload: {
-                        course: res.body
-                        // sections: res.body.sections,
-                        // tasks: res.body.sections.reduce((acc, obj) => {
-                        //     return acc.concat(obj.tasks);
-                        // }, [])
+                        course: res.body.course,
+                        sections: res.body.sections
                     }
                 })),
                 catchError((err: HttpErrorResponse) =>

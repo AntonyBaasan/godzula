@@ -40,4 +40,7 @@ public interface SectionService {
      * @param id the id of the entity
      */
     void delete(String id);
+
+
+    List<SectionDTO> findByCourseId(String id);
 }

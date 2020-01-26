@@ -1,52 +1,55 @@
 <div *ngIf="error">
-   <button type="button" class="btn btn-dark" (click)="goHome()">Home</button>
-   <div class="py-4">
-      {{getErrorMessage()}}
-   </div>
+    <button type="button" class="btn btn-dark" (click)="goHome()">Home</button>
+    <div class="py-4">
+        {{getErrorMessage()}}
+    </div>
 </div>
 
 <div *ngIf="course$ | async">
-   <div class="container p-2 course-page d-flex flex-column">
-      <div class="row mb-2">
-         <div class="col-12">
-            <div class="row">
-               <button type="button" class="btn btn-dark" (click)="goBack()">Back</button>
-               <div class="col-1">
-               </div>
-               <div class="col-9">
-                  <h3 class="text-center pr-4">{{(course$ | async).name}}</h3>
-               </div>
+    <div class="container p-2 course-page d-flex flex-column">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="row">
+                    <button type="button" class="btn btn-dark" (click)="goBack()">Back</button>
+                    <div class="col-1">
+                    </div>
+                    <div class="col-9">
+                        <h3 class="text-center pr-4">{{(course$ | async).name}}</h3>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-      <div class="row justify-content-center flex-fill">
-         <div class="col-12 border">
-            <div class="row h-100">
-               <div class="col-3 p-0">
-                  <jhi-section-list [sectionListItem]="sectionList" [selectedItem]="selectedSection"
-                     (SectionSelect)="sectionSelected($event)">
-                  </jhi-section-list>
-               </div>
-               <div class="col-7 border-right border-left">
-                  <jhi-section-play [showHint]="showHint" [SectionItem]="selectedSection"
-                     [Device]="getSelectedSectionDevice()" (SectionPassed)="sectionPass()" (Next)="onNext()">
-                  </jhi-section-play>
-               </div>
-               <div class="col-2">
-                  <div class="d-flex mt-5">
-                     <div>
-                        <label class="switch">
-                           <input type="checkbox" [(ngModel)]="showHint">
-                           <span class="slider round"></span>
-                        </label>
-                     </div>
-                     <div>
-                        <span class="hint-label ml-1">Hint</span>
-                     </div>
-                  </div>
-               </div>
+        </div>
+        <div class="row justify-content-center flex-fill">
+            <div class="col-12 border">
+                <div class="row h-100">
+                    <!-- LEFT PANEL-->
+                    <div class="col-3 p-0">
+                        <jhi-section-list [sectionListItem]="sectionList" [selectedItem]="selectedSection"
+                            (SectionSelect)="sectionSelected($event)">
+                        </jhi-section-list>
+                    </div>
+                    <!-- CENTER PANEL-->
+                    <div class="col-7 border-right border-left">
+                        <!-- <jhi-section-play [showHint]="showHint" [SectionItem]="selectedSection"
+                     [Device]="" (SectionPassed)="sectionPass()" (Next)="onNext()">
+                  </jhi-section-play> -->
+                    </div>
+                    <!-- RIGHT PANEL-->
+                    <div class="col-2">
+                        <div class="d-flex mt-5">
+                            <div>
+                                <label class="switch">
+                                    <input type="checkbox" [(ngModel)]="showHint">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div>
+                                <span class="hint-label ml-1">Hint</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

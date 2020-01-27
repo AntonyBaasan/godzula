@@ -72,7 +72,7 @@ export class CoursePageComponent implements OnInit {
 
     sectionSelected(section: SectionListItem) {
         console.log(section);
-        // this.selectedSection = section;
+        this.selectedSection = section;
         (<any>window).ga('send', 'pageview');
     }
 

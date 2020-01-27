@@ -1,4 +1,4 @@
-import { CourseActionTypes, CourseActions } from './../course/course.actions';
+import { CourseActionTypes, CourseActions, ICourseDetails } from './../course/course.actions';
 import { SectionActionTypes, SectionActions } from './section.actions';
 import { ISection } from '../../shared/model/section.model';
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
@@ -15,7 +15,7 @@ export const initialState: SectionState = sectionAdapter.getInitialState({
 export function sectionReducer(state = initialState, action: CourseActions | SectionActions) {
     switch (action.type) {
         case CourseActionTypes.CourseDetailsLoaded:
-            const sections = action.payload.sections;
+            const sections = readSections(action.payload);
             state = sectionAdapter.removeAll(state);
             const newState = sectionAdapter.addMany(sections, state);
             return newState;
@@ -25,4 +25,16 @@ export function sectionReducer(state = initialState, action: CourseActions | Sec
         default:
             return state;
     }
+}
+
+function readSections(courseDetail: ICourseDetails) {
+    const sections = courseDetail.sections;
+    courseDetail.tasks.forEach(t => {
+        const section = sections.find(s => s.id === t.sectionId);
+        if (!section.tasks) {
+            section.tasks = [];
+        }
+        section.tasks.push(t);
+    });
+    return sections;
 }

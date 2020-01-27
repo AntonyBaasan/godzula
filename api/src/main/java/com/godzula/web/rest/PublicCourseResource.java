@@ -70,6 +70,9 @@ public class PublicCourseResource {
         }
     }
 
+    /**
+     *  Creates section and task about a course
+     */
     private FullCourseDTO getFullCourse(CourseDTO course){
         FullCourseDTO fullCourse = new FullCourseDTO();
         fullCourse.setCourse(course);

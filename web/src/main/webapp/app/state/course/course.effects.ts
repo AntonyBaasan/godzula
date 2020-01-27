@@ -38,7 +38,8 @@ export class CourseEffects {
                     type: CourseActionTypes.CourseDetailsLoaded,
                     payload: {
                         course: res.body.course,
-                        sections: res.body.sections
+                        sections: res.body.sections,
+                        tasks: res.body.tasks
                     }
                 })),
                 catchError((err: HttpErrorResponse) =>

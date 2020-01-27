@@ -5,7 +5,7 @@
         (click)="selectSection(item)"
         [class.active]="isSelectedItem(item)"
         [class.font-weight-bold]="item.passed==true"
-        [class.disabled]="item.passed==true">
+        >
         <span>{{item.section.name}}</span>
       </div>
     </li>

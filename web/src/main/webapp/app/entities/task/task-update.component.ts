@@ -11,6 +11,7 @@ import { ITask, Task } from 'app/shared/model/task.model';
 import { TaskService } from './task.service';
 import { ISection } from 'app/shared/model/section.model';
 import { SectionService } from 'app/entities/section/section.service';
+import { InputKeyboard } from 'app/shared/util/inputkeyboard.model';
 
 @Component({
     selector: 'jhi-task-update',
@@ -58,7 +59,7 @@ export class TaskUpdateComponent implements OnInit {
             id: task.id,
             question: task.question,
             description: task.description,
-            answer: task.answer,
+            answer: JSON.parse(task.answer),
             type: task.type,
             targetMachine: task.targetMachine,
             sectionId: task.sectionId
@@ -85,7 +86,7 @@ export class TaskUpdateComponent implements OnInit {
             id: this.editForm.get(['id']).value,
             question: this.editForm.get(['question']).value,
             description: this.editForm.get(['description']).value,
-            answer: this.editForm.get(['answer']).value,
+            answer: JSON.stringify(this.editForm.get(['answer']).value),
             type: this.editForm.get(['type']).value,
             targetMachine: this.editForm.get(['targetMachine']).value,
             sectionId: this.editForm.get(['sectionId']).value
@@ -110,5 +111,9 @@ export class TaskUpdateComponent implements OnInit {
 
     trackSectionById(index: number, item: ISection) {
         return item.id;
+    }
+    onKeyInput(keys: InputKeyboard[]) {
+        console.log(keys);
+        this.editForm.get(['answer']).setValue(keys);
     }
 }

@@ -6,30 +6,36 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_question">Question</label>
                     <input type="text" class="form-control" name="question" id="field_question"
-                           formControlName="question"/>
-                    <div *ngIf="editForm.get('question').invalid && (editForm.get('question').dirty || editForm.get('question').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('question').errors.required">
-                        This field is required.
+                        formControlName="question" />
+                    <div
+                        *ngIf="editForm.get('question').invalid && (editForm.get('question').dirty || editForm.get('question').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('question').errors.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
-                           formControlName="description"/>
+                        formControlName="description" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_answer">Answer</label>
-                    <input type="text" class="form-control" name="answer" id="field_answer"
-                           formControlName="answer"/>
+                    <input type="text" class="form-control" name="answer" id="field_answer" formControlName="answer" />
                 </div>
+
+                <jhi-key-input #keyInputField
+                    [isCompact]="true"
+                    [label]="" [showClearButton]="true"
+                    [showHint]="false" [Device]="device"
+                    [values]="this.editForm.get(['answer']).value"
+                    (valuesChanged)="onKeyInput($event)"></jhi-key-input>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
                     <select class="form-control" name="type" formControlName="type" id="field_type">
@@ -39,7 +45,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_targetMachine">Target Machine</label>
-                    <select class="form-control" name="targetMachine" formControlName="targetMachine" id="field_targetMachine">
+                    <select class="form-control" name="targetMachine" formControlName="targetMachine"
+                        id="field_targetMachine">
                         <option value="ANY">ANY</option>
                         <option value="WIN">WIN</option>
                         <option value="MAC">MAC</option>
@@ -50,15 +57,18 @@
                     <label class="form-control-label" for="field_section">Section</label>
                     <select class="form-control" id="field_section" name="section" formControlName="sectionId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="sectionOption.id" *ngFor="let sectionOption of sections; trackBy: trackSectionById">{{sectionOption.id}}</option>
+                        <option [ngValue]="sectionOption.id"
+                            *ngFor="let sectionOption of sections; trackBy: trackSectionById">{{sectionOption.id}}
+                        </option>
                     </select>
                 </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>

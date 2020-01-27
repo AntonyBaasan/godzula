@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { CourseActionTypes, CourseDetailsLoad, CourseLoadFailed } from './course.actions';
+import { CourseActionTypes, CourseDetailsLoad } from './course.actions';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { PublicCourseService } from 'app/entities/course/pubilc-course.service';
 

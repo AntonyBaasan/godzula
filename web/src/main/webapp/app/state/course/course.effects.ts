@@ -33,7 +33,7 @@ export class CourseEffects {
     loadCourseDetail$ = this.actions$.pipe(
         ofType<CourseDetailsLoad>(CourseActionTypes.CourseDetailsLoad),
         mergeMap(action =>
-            this.publicCourseSerivce.openCourse(action.payload).pipe(
+            this.publicCourseSerivce.getCourse(action.payload).pipe(
                 map(res => ({
                     type: CourseActionTypes.CourseDetailsLoaded,
                     payload: {

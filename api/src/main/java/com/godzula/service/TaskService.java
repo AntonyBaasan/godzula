@@ -40,4 +40,7 @@ public interface TaskService {
      * @param id the id of the entity
      */
     void delete(String id);
+
+    List<TaskDTO> findBySectionIds(List<String> sectionIds);
+
 }

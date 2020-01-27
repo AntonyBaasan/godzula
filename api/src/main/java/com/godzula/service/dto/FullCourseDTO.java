@@ -13,9 +13,8 @@ import java.util.Objects;
 public class FullCourseDTO implements Serializable {
 
     private CourseDTO course;
-
     private List<SectionDTO> sections;
-
+    private List<TaskDTO> tasks;
 
     public CourseDTO getCourse() {
         return course;
@@ -31,5 +30,13 @@ public class FullCourseDTO implements Serializable {
 
     public void setSections(List<SectionDTO> sections) {
         this.sections = sections;
+    }
+
+    public List<TaskDTO> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<TaskDTO> tasks) {
+        this.tasks = tasks;
     }
 }

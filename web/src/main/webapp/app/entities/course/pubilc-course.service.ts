@@ -6,6 +6,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { ICourse } from 'app/shared/model/course.model';
 import { IFullCourse } from 'app/shared/model/full-course.model';
+import { ITask } from 'app/shared/model/task.model';
 
 type EntityResponseType = HttpResponse<ICourse>;
 type EntityArrayResponseType = HttpResponse<ICourse[]>;
@@ -21,7 +22,11 @@ export class PublicCourseService {
         return this.http.get<ICourse[]>(this.resourceUrl + '/', { params: options, observe: 'response' });
     }
 
-    openCourse(id: string): Observable<HttpResponse<IFullCourse>> {
+    getCourse(id: string): Observable<HttpResponse<IFullCourse>> {
         return this.http.get<IFullCourse>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+
+    getTasks(courseId: string, sectionId: string): Observable<HttpResponse<ITask[]>> {
+        return this.http.get<ITask[]>(`${this.resourceUrl}/${courseId}/section/${sectionId}`, { observe: 'response' });
     }
 }

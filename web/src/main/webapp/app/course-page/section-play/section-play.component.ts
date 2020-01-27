@@ -25,10 +25,11 @@ interface HistoryItem {
     styleUrls: ['./section-play.component.scss']
 })
 export class SectionPlayComponent implements OnInit {
+    @Input() showHint = true;
     @Output() SectionPassed: EventEmitter<any> = new EventEmitter();
     @Output() Next: EventEmitter<void> = new EventEmitter();
     @ViewChild('keyInputField') keyInputField: KeyInputComponent;
-    @Input() showHint = true;
+
     device: 'Win' | 'Mac';
     tasksToCheck: TaskToCheck[] = [];
     public sectionItem: SectionListItem;
@@ -45,6 +46,17 @@ export class SectionPlayComponent implements OnInit {
     set Device(device: 'Win' | 'Mac') {
         this.device = device;
         this.setupKeyboardUtil();
+    }
+
+    @Input()
+    public set SectionItem(sectionListItem: SectionListItem) {
+        this.sectionItem = sectionListItem;
+
+        this.shuffleTasks();
+        this.refresh();
+        if (this.keyInputField) {
+            this.keyInputField.focus();
+        }
     }
 
     ngOnInit() {}
@@ -72,16 +84,6 @@ export class SectionPlayComponent implements OnInit {
             return true;
         }
         return false;
-    }
-
-    @Input()
-    public set SectionItem(sectionListItem: SectionListItem) {
-        this.sectionItem = sectionListItem;
-        this.shuffleTasks();
-        this.refresh();
-        if (this.keyInputField) {
-            this.keyInputField.focus();
-        }
     }
 
     private shuffleTasks() {

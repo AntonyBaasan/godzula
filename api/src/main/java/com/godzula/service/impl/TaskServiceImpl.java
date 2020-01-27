@@ -84,4 +84,11 @@ public class TaskServiceImpl implements TaskService {
         log.debug("Request to delete Task : {}", id);
         taskRepository.deleteById(id);
     }
+
+    @Override
+    public List<TaskDTO> findBySectionIds(List<String> sectionIds) {
+        return taskRepository.findBySectionIn(sectionIds).stream()
+            .map(taskMapper::toDto)
+            .collect(Collectors.toList());
+    }
 }

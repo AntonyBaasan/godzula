@@ -3,9 +3,11 @@ package com.godzula.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.godzula.service.CourseService;
 import com.godzula.service.SectionService;
+import com.godzula.service.TaskService;
 import com.godzula.service.dto.CourseDTO;
 import com.godzula.service.dto.FullCourseDTO;
 import com.godzula.service.dto.SectionDTO;
+import com.godzula.service.dto.TaskDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Course.
@@ -29,13 +33,16 @@ public class PublicCourseResource {
 
     private final CourseService courseService;
     private final SectionService sectionService;
+    private final TaskService taskService;
 
     public PublicCourseResource(
         CourseService courseService,
-        SectionService sectionService
+        SectionService sectionService,
+        TaskService taskService
     ) {
         this.courseService = courseService;
         this.sectionService = sectionService;
+        this.taskService = taskService;
     }
 
     @GetMapping("/courses")
@@ -57,14 +64,24 @@ public class PublicCourseResource {
         log.debug("REST request to get Course : {}", id);
         Optional<CourseDTO> courseDTO = courseService.findOne(id);
         if(courseDTO.isPresent()){
-            List<SectionDTO> sections = sectionService.findByCourseId(id);
-            FullCourseDTO courseWithSections = new FullCourseDTO();
-            courseWithSections.setCourse(courseDTO.get());
-            courseWithSections.setSections(sections);
-            return ResponseEntity.ok(courseWithSections);
-
+            return ResponseEntity.ok(getFullCourse(courseDTO.get()));
         }else{
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
+
+    private FullCourseDTO getFullCourse(CourseDTO course){
+        FullCourseDTO fullCourse = new FullCourseDTO();
+        fullCourse.setCourse(course);
+
+        List<SectionDTO> sections = sectionService.findByCourseId(course.getId());
+        fullCourse.setSections(sections);
+
+        List<String> sectionIds = sections.stream().map(SectionDTO::getId).collect(Collectors.toList());
+        List<TaskDTO> tasks = taskService.findBySectionIds(sectionIds);
+        fullCourse.setTasks(tasks);
+
+        return fullCourse;
+    }
+
 }

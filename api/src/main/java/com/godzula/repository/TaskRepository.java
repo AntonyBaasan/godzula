@@ -5,6 +5,8 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 /**
  * Spring Data MongoDB repository for the Task entity.
@@ -12,5 +14,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface TaskRepository extends MongoRepository<Task, String> {
-
+    List<Task> findBySectionIn(List<String> ids);
 }

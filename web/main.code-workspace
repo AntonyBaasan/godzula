@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name":"web",
+			"path": "src/main/webapp/app"
+		},
+		{
+			"name":"all",
+			"path": 
+		},
+	],
+	"settings": {}
+    }

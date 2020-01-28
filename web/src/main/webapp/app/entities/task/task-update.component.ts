@@ -59,7 +59,7 @@ export class TaskUpdateComponent implements OnInit {
             id: task.id,
             question: task.question,
             description: task.description,
-            answer: task.answer ? JSON.parse(task.answer) : [],
+            answer: task.answer ? JSON.parse(task.answer) : undefined,
             type: task.type,
             targetMachine: task.targetMachine,
             sectionId: task.sectionId

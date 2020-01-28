@@ -22,7 +22,10 @@
           </div>
         </div>
         <div class="mb-2">
-          <jhi-key-input #keyInputField [values]="values" [label]="getCurrentQuestion()" [showClearButton]="false"
+          <jhi-key-input #keyInputField 
+            [values]="values" 
+            [label]="getCurrentQuestion()" 
+            [showClearButton]="false"
             [showHint]="showHint"
             [Hint]="getCurrentAnswer()"
             [Device]="device"

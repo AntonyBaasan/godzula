@@ -33,7 +33,7 @@
                     [isCompact]="true"
                     [label]="" [showClearButton]="true"
                     [showHint]="false" [Device]="device"
-                    [values]="this.editForm.get(['answer']).value"
+                    [values]="getValues()"
                     (valuesChanged)="onKeyInput($event)"></jhi-key-input>
 
                 <div class="form-group">

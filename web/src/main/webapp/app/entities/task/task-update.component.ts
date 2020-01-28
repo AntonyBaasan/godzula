@@ -59,7 +59,7 @@ export class TaskUpdateComponent implements OnInit {
             id: task.id,
             question: task.question,
             description: task.description,
-            answer: JSON.parse(task.answer),
+            answer: task.answer ? JSON.parse(task.answer) : [],
             type: task.type,
             targetMachine: task.targetMachine,
             sectionId: task.sectionId
@@ -115,5 +115,11 @@ export class TaskUpdateComponent implements OnInit {
     onKeyInput(keys: InputKeyboard[]) {
         console.log(keys);
         this.editForm.get(['answer']).setValue(keys);
+    }
+    getValues() {
+        if (this.editForm.get(['answer']).value) {
+            return this.editForm.get(['answer']).value;
+        }
+        return [];
     }
 }

@@ -1,70 +1,67 @@
 <div>
     <h2 id="page-heading">
         <span>Tasks</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-task" [routerLink]="['/task/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-task"
+            [routerLink]="['/task/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-            Create a new Task
+            <span>
+                Create a new Task
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
-    <br/>
+    <br />
     <div class="alert alert-warning" *ngIf="tasks?.length === 0">
         <span>No tasks found</span>
     </div>
     <div class="table-responsive" *ngIf="tasks?.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-            <tr>
-            <th><span>ID</span></th>
-            <th><span>Question</span></th>
-            <th><span>Description</span></th>
-            <th><span>Answer</span></th>
-            <th><span>Type</span></th>
-            <th><span>Target Machine</span></th>
-            <th><span>Section</span></th>
-            <th></th>
-            </tr>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Question</span></th>
+                    <th><span>Description</span></th>
+                    <th><span>Answer</span></th>
+                    <th><span>Type</span></th>
+                    <th><span>Course</span></th>
+                    <th><span>Section</span></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let task of tasks ;trackBy: trackId">
-                <td><a [routerLink]="['/task', task.id, 'view' ]">{{task.id}}</a></td>
-                <td>{{task.question}}</td>
-                <td>{{task.description}}</td>
-                <td>{{task.answer}}</td>
-                <td>{{task.type}}</td>
-                <td>{{task.targetMachine}}</td>
-                <td>
-                    <div *ngIf="task.sectionId">
-                        <a [routerLink]="['/section', task.sectionId , 'view' ]" >{{task.sectionId}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group">
-                        <button type="submit"
-                                [routerLink]="['/task', task.id, 'view' ]"
+                <tr *ngFor="let task of tasks ;trackBy: trackId">
+                    <td><a [routerLink]="['/task', task.id, 'view' ]">{{task.id}}</a></td>
+                    <td>{{task.question}}</td>
+                    <td>{{task.description}}</td>
+                    <td>{{getAnswerAsShortCut(task.answer)}}</td>
+                    <td>{{task.type}}</td>
+                    <td>{{getCourseNameBySectionId(task.sectionId)}}</td>
+                    <td>
+                        <div *ngIf="task.sectionId">
+                            <a
+                                [routerLink]="['/section', task.sectionId , 'view' ]">{{getSectionNameById(task.sectionId)}}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit" [routerLink]="['/task', task.id, 'view' ]"
                                 class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/task', task.id, 'edit']"
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/task', task.id, 'edit']"
                                 class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/task', { outlets: { popup: task.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/task', { outlets: { popup: task.id + '/delete'} }]"
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

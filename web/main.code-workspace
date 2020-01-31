@@ -6,8 +6,8 @@
 		},
 		{
 			"name":"all",
-			"path": 
-		},
+			"path": "."
+		}
 	],
 	"settings": {}
     }

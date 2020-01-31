@@ -19,22 +19,30 @@ echo "$API_COMMIT"
 
 echo 'starting... '
 
-if [ "$LATEST_COMMIT" = "$WEB_COMMIT" ] \
-        && echo "files in 'web' has changed" \
+if [ "$LATEST_COMMIT" = "$WEB_COMMIT" ] 
+then
+    if echo "files in 'web' has changed" \
         && cd "$CWD/web" \
         && npm install && npm run test && npm run build
     then
-    echo "web done."
+        echo "web done."
+    else
+        exit 1;
+    fi
 fi
 
-if [ "$LATEST_COMMIT" = "$API_COMMIT" ] \
-        && echo "files in 'api' has changed" \
+if [ "$LATEST_COMMIT" = "$API_COMMIT" ] 
+then
+    if [ echo "files in 'api' has changed" \
         && cd "$CWD/api" \
-        && ./build.sh
+        && ./build.sh ]
     then
-    echo "api done."
+        echo "api done."
+    else
+        exit 1;
+    fi
 fi
 
 echo 'all done.'
 
-exit 0
+exit 0;

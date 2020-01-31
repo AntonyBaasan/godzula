@@ -12,19 +12,22 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
                 ...LAYOUT_ROUTES,
                 {
                     path: 'course',
-                    loadChildren: () => import('./entities/course/course.module').then(m => m.GodzulawebCourseModule)
+                    // loadChildren: () => import('./entities/course/course.module').then(m => m.GodzulawebCourseModule)
+                    loadChildren: './entities/course/course.module#GodzulawebCourseModule'
                 },
                 {
                     path: 'section',
-                    loadChildren: () => import('./entities/section/section.module').then(m => m.GodzulawebSectionModule)
+                    // loadChildren: () => import('./entities/section/section.module').then(m => m.GodzulawebSectionModule)
+                    loadChildren: './entities/section/section.module#GodzulawebSectionModule'
                 },
                 {
                     path: 'task',
-                    loadChildren: () => import('./entities/task/task.module').then(m => m.GodzulawebTaskModule)
+                    // loadChildren: () => import('./entities/task/task.module').then(m => m.GodzulawebTaskModule)
+                    loadChildren: './entities/task/task.module#GodzulawebTaskModule'
                 },
                 {
                     path: 'admin',
-                    loadChildren: () => import('./admin/admin.module').then(m => m.GodzulawebAdminModule)
+                    loadChildren: './admin/admin.module#GodzulawebAdminModule'
                 }
             ],
             { useHash: true, enableTracing: DEBUG_INFO_ENABLED }

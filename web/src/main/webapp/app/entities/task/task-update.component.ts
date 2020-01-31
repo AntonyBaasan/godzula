@@ -150,6 +150,9 @@ export class TaskUpdateComponent implements OnInit {
             return null;
         }
         const section = this.sections.find(s => s.id === sectionId);
+        if (!section) {
+            return null;
+        }
         const course = this.courses.find(c => c.id === section.id);
         return course.id;
     }

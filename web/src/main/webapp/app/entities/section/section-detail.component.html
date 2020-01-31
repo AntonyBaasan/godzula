@@ -28,7 +28,7 @@
                 <dt><span>Course</span></dt>
                 <dd>
                     <div *ngIf="section.courseId">
-                        <a [routerLink]="['/course', section.courseId, 'view']">{{section.courseId}}</a>
+                        <a [routerLink]="['/course', section.courseId, 'view']">{{getCourseNameById(section.courseId)}}</a>
                     </div>
                 </dd>
             </dl>

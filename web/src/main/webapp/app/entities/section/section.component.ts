@@ -8,6 +8,8 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { ISection } from 'app/shared/model/section.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { SectionService } from './section.service';
+import { CourseService } from '../course/course.service';
+import { ICourse } from 'app/shared/model/course.model';
 
 @Component({
     selector: 'jhi-section',
@@ -17,12 +19,14 @@ export class SectionComponent implements OnInit, OnDestroy {
     sections: ISection[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    courses: ICourse[];
 
     constructor(
         protected sectionService: SectionService,
         protected jhiAlertService: JhiAlertService,
         protected eventManager: JhiEventManager,
-        protected accountService: AccountService
+        protected accountService: AccountService,
+        protected courseService: CourseService
     ) {}
 
     loadAll() {
@@ -38,6 +42,14 @@ export class SectionComponent implements OnInit, OnDestroy {
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+
+        this.courseService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<ICourse[]>) => mayBeOk.ok),
+                map((response: HttpResponse<ICourse[]>) => response.body)
+            )
+            .subscribe((res: ICourse[]) => (this.courses = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     ngOnInit() {
@@ -58,6 +70,14 @@ export class SectionComponent implements OnInit, OnDestroy {
 
     registerChangeInSections() {
         this.eventSubscriber = this.eventManager.subscribe('sectionListModification', response => this.loadAll());
+    }
+
+    getCourseNameById(courseId: string) {
+        if (!this.courses) {
+            return courseId;
+        }
+        const course = this.courses.find(c => c.id === courseId);
+        return course ? course.name : courseId;
     }
 
     protected onError(errorMessage: string) {

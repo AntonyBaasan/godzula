@@ -37,7 +37,7 @@
                 <td>{{section.order}}</td>
                 <td>
                     <div *ngIf="section.courseId">
-                        <a [routerLink]="['/course', section.courseId , 'view' ]" >{{section.courseId}}</a>
+                        <a [routerLink]="['/course', section.courseId , 'view' ]" >{{getCourseNameById(section.courseId)}}</a>
                     </div>
                 </td>
                 <td class="text-right">

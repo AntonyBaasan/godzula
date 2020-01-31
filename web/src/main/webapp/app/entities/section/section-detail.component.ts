@@ -21,4 +21,8 @@ export class SectionDetailComponent implements OnInit {
     previousState() {
         window.history.back();
     }
+
+    getCourseNameById(courseId: string) {
+        return courseId;
+    }
 }

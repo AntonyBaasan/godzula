@@ -24,7 +24,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
                 },
                 {
                     path: 'admin',
-                    loadChildren: './admin/admin.module#GodzulawebAdminModule'
+                    loadChildren: () => import('./admin/admin.module').then(m => m.GodzulawebAdminModule)
                 }
             ],
             { useHash: true, enableTracing: DEBUG_INFO_ENABLED }

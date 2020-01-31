@@ -17,8 +17,7 @@ elif [ $LATEST_COMMIT = $WEB_COMMIT ];
         echo "files in 'web' has changed"
         cd "$CWD/web"
         npm i -g firebase-tools
-        # firebase deploy --token $FIREBASE_TOKEN
-        firebase deploy --token 1//0fJmK6z0f9XFtCgYIARAAGA8SNwF-L9IrV0vSjQVf-f2mjQq2fRvKrgizmAaFY_lRG7gsqFigmAaeawPqb0Sp2nYlPa1_HCtzptk
+        firebase deploy --token $FIREBASE_TOKEN
 fi
 
 if [ -z $API_COMMIT ]

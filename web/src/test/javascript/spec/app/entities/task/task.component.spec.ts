@@ -6,6 +6,8 @@ import { GodzulawebTestModule } from '../../../test.module';
 import { TaskComponent } from 'app/entities/task/task.component';
 import { TaskService } from 'app/entities/task/task.service';
 import { Task } from 'app/shared/model/task.model';
+import { GodzulawebSharedModule } from 'app/shared';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 describe('Component Tests', () => {
     describe('Task Management Component', () => {
@@ -15,9 +17,9 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GodzulawebTestModule],
+                imports: [GodzulawebTestModule, GodzulawebSharedModule],
                 declarations: [TaskComponent],
-                providers: []
+                providers: [DeviceDetectorService]
             })
                 .overrideTemplate(TaskComponent, '')
                 .compileComponents();

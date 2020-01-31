@@ -7,6 +7,9 @@ import { GodzulawebTestModule } from '../../../test.module';
 import { TaskUpdateComponent } from 'app/entities/task/task-update.component';
 import { TaskService } from 'app/entities/task/task.service';
 import { Task } from 'app/shared/model/task.model';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { GodzulawebSharedModule } from 'app/shared';
+import { KeyboardUtil } from 'app/shared/util/keyboard-util';
 
 describe('Component Tests', () => {
     describe('Task Management Update Component', () => {
@@ -16,9 +19,9 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GodzulawebTestModule],
+                imports: [GodzulawebTestModule, GodzulawebSharedModule],
                 declarations: [TaskUpdateComponent],
-                providers: [FormBuilder]
+                providers: [FormBuilder, DeviceDetectorService, KeyboardUtil]
             })
                 .overrideTemplate(TaskUpdateComponent, '')
                 .compileComponents();

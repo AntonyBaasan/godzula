@@ -25,7 +25,7 @@ export class KeyInputComponent implements OnInit {
     inputText: String[] = [];
     hint: InputKeyboard[] = [];
 
-    constructor(private keyboardUtil: KeyboardUtil, private deviceDetectorService: DeviceDetectorService) {}
+    constructor(private keyboardUtil: KeyboardUtil) {}
 
     @Input()
     public set Hint(hint: InputKeyboard[]) {

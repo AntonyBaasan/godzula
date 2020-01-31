@@ -24,17 +24,18 @@
                     <input type="text" class="form-control" name="description" id="field_description"
                         formControlName="description" />
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" for="field_answer">Answer</label>
                     <input type="text" class="form-control" name="answer" id="field_answer" formControlName="answer" />
+                </div> -->
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_answer">Answer</label>
+                    <jhi-key-input #keyInputField [isCompact]="true" [label]="" [showClearButton]="true"
+                        [showHint]="false" [Device]="device" [values]="getValues()"
+                        (valuesChanged)="onKeyInput($event)"></jhi-key-input>
                 </div>
 
-                <jhi-key-input #keyInputField
-                    [isCompact]="true"
-                    [label]="" [showClearButton]="true"
-                    [showHint]="false" [Device]="device"
-                    [values]="getValues()"
-                    (valuesChanged)="onKeyInput($event)"></jhi-key-input>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
@@ -43,7 +44,7 @@
                         <option value="TEXT">TEXT</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" for="field_targetMachine">Target Machine</label>
                     <select class="form-control" name="targetMachine" formControlName="targetMachine"
                         id="field_targetMachine">
@@ -51,7 +52,7 @@
                         <option value="WIN">WIN</option>
                         <option value="MAC">MAC</option>
                     </select>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_section">Section</label>

@@ -12,6 +12,7 @@ import { TaskService } from './task.service';
 import { ISection } from 'app/shared/model/section.model';
 import { SectionService } from 'app/entities/section/section.service';
 import { InputKeyboard } from 'app/shared/util/inputkeyboard.model';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
     selector: 'jhi-task-update',
@@ -19,8 +20,8 @@ import { InputKeyboard } from 'app/shared/util/inputkeyboard.model';
 })
 export class TaskUpdateComponent implements OnInit {
     isSaving: boolean;
-
     sections: ISection[];
+    device: 'Win' | 'Mac' = 'Win';
 
     editForm = this.fb.group({
         id: [],
@@ -37,10 +38,12 @@ export class TaskUpdateComponent implements OnInit {
         protected taskService: TaskService,
         protected sectionService: SectionService,
         protected activatedRoute: ActivatedRoute,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private deviceDetectorService: DeviceDetectorService
     ) {}
 
     ngOnInit() {
+        this.device = this.deviceDetectorService.getDeviceInfo().os as any;
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ task }) => {
             this.updateForm(task);

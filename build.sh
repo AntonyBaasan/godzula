@@ -23,7 +23,9 @@ if [ "$LATEST_COMMIT" = "$WEB_COMMIT" ]
 then
     if echo "files in 'web' has changed" \
         && cd "$CWD/web" \
-        && npm install && npm run test && npm run build
+        && npm install \
+        && npm run test \
+        && npm run build
     then
         echo "web done."
     else
@@ -33,9 +35,9 @@ fi
 
 if [ "$LATEST_COMMIT" = "$API_COMMIT" ] 
 then
-    if [ echo "files in 'api' has changed" \
+    if echo "files in 'api' has changed" \
         && cd "$CWD/api" \
-        && ./build.sh ]
+        && ./build.sh
     then
         echo "api done."
     else

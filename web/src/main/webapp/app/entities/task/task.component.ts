@@ -101,22 +101,19 @@ export class TaskComponent implements OnInit, OnDestroy {
     }
 
     getSectionNameById(sectionId: string) {
-        if (!this.sections) {
-            return sectionId;
-        }
-        const section = this.sections.find(c => c.id === sectionId);
-        return section ? section.name : sectionId;
+        return this.sectionService.getSectionNameById(this.sections, sectionId);
     }
 
     getCourseNameBySectionId(sectionId: string) {
         if (!this.courses || !this.sections) {
             return '';
         }
+
         const section = this.sections.find(c => c.id === sectionId);
-        if (!section) {
+        if (!section && section === sectionId) {
             return '';
         }
-        const course = this.courses.find(c => c.id === section.courseId);
+        const course = this.courses.find(c => c.id === section);
         return course ? course.name : '';
     }
 

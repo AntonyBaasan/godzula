@@ -35,4 +35,12 @@ export class SectionService {
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+
+    getSectionNameById(sections: ISection[], sectionId: string) {
+        if (!sections) {
+            return sectionId;
+        }
+        const section = sections.find(c => c.id === sectionId);
+        return section ? section.name : sectionId;
+    }
 }

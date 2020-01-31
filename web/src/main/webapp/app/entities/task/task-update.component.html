@@ -24,10 +24,6 @@
                     <input type="text" class="form-control" name="description" id="field_description"
                         formControlName="description" />
                 </div>
-                <!-- <div class="form-group">
-                    <label class="form-control-label" for="field_answer">Answer</label>
-                    <input type="text" class="form-control" name="answer" id="field_answer" formControlName="answer" />
-                </div> -->
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_answer">Answer</label>
@@ -44,22 +40,23 @@
                         <option value="TEXT">TEXT</option>
                     </select>
                 </div>
-                <!-- <div class="form-group">
-                    <label class="form-control-label" for="field_targetMachine">Target Machine</label>
-                    <select class="form-control" name="targetMachine" formControlName="targetMachine"
-                        id="field_targetMachine">
-                        <option value="ANY">ANY</option>
-                        <option value="WIN">WIN</option>
-                        <option value="MAC">MAC</option>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_section">Course</label>
+                    <select class="form-control" id="field_section" name="section" formControlName="courseId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="courseOption.id"
+                            *ngFor="let courseOption of courses; trackBy: trackSectionById">{{courseOption.name}}
+                        </option>
                     </select>
-                </div> -->
+                </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_section">Section</label>
                     <select class="form-control" id="field_section" name="section" formControlName="sectionId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="sectionOption.id"
-                            *ngFor="let sectionOption of sections; trackBy: trackSectionById">{{sectionOption.id}}
+                            *ngFor="let sectionOption of filteredSections(); trackBy: trackSectionById">{{sectionOption.name}}
                         </option>
                     </select>
                 </div>

@@ -73,11 +73,7 @@ export class SectionComponent implements OnInit, OnDestroy {
     }
 
     getCourseNameById(courseId: string) {
-        if (!this.courses) {
-            return courseId;
-        }
-        const course = this.courses.find(c => c.id === courseId);
-        return course ? course.name : courseId;
+        return this.courseService.getCourseNameById(this.courses, courseId);
     }
 
     protected onError(errorMessage: string) {

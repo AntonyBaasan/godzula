@@ -35,4 +35,12 @@ export class CourseService {
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+
+    getCourseNameById(courses: ICourse[], courseId: string) {
+        if (!courses) {
+            return courseId;
+        }
+        const course = courses.find(c => c.id === courseId);
+        return course ? course.name : courseId;
+    }
 }

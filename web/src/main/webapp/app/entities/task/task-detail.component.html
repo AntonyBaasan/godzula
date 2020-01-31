@@ -21,14 +21,10 @@
                 <dd>
                     <span>{{task.type}}</span>
                 </dd>
-                <!-- <dt><span>Target Machine</span></dt>
-                <dd>
-                    <span>{{task.targetMachine}}</span>
-                </dd> -->
                 <dt><span>Section</span></dt>
                 <dd>
                     <div *ngIf="task.sectionId">
-                        <a [routerLink]="['/section', task.sectionId, 'view']">{{task.sectionId}}</a>
+                        <a [routerLink]="['/section', task.sectionId, 'view']">{{getSectionNameById(task.sectionId)}}</a>
                     </div>
                 </dd>
             </dl>
